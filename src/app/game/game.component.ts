@@ -57,22 +57,26 @@ export class GameComponent {
 
   public onGameOver() {
     this.addScore();
+    this.status = 'game over';
     clearInterval(this.interval);
   }
 
   public onStartButtonPressed() {
     this._snake.actionStart();
+    this.status = 'play';
     this.interval = setInterval(() => this.timeRecording(), 100);
   }
 
   public onStopButtonPressed() {
     this._snake.actionStop();
+    this.status = 'pause';
     clearInterval(this.interval);
   }
 
   public onResetButtonPressed() {
     this._snake.actionReset();
     this.addScore();
+    this.status = 'ready';
     this.points = 0;
     clearInterval(this.interval);
     this.seconds = 0;
