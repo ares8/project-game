@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
+import { Score } from '../models';
 
 @Component({
   selector: 'app-game',
@@ -12,13 +13,25 @@ export class GameComponent {
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
 
-  public onGrow() {
-    console.log('grow');
+  public points = 0;
+  public scores: Array<Score> = [];
+  public status = 'ready';
+  public time = '00:00:00';
+  public name = '';
+
+  public addScore() {
+    this.scores.push({
+      name: this.name,
+      points: this.points,
+      time: this.time,
+    });
   }
 
-  public onGameOver() {
-    alert('game over');
+  public onGrow() {
+    this.points++;
   }
+
+  public onGameOver() {}
 
   public onStartButtonPressed() {
     this._snake.actionStart();
