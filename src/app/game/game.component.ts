@@ -16,8 +16,31 @@ export class GameComponent {
   public points = 0;
   public scores: Array<Score> = [];
   public status = 'ready';
+  public seconds = 0;
+  public minutes = 0;
+  public hours = 0;
   public time = '00:00:00';
   public name = '';
+
+  public timeRecording() {
+    this.seconds += 0.1;
+    if (this.seconds > 59) {
+      this.minutes++;
+      this.seconds = 0;
+    }
+    if (this.minutes > 59) {
+      this.hours++;
+      this.minutes = 0;
+    }
+    const hoursView = this.hours < 10 ? '0' + this.hours : this.hours;
+    const minutesView = this.minutes < 10 ? '0' + this.minutes : this.minutes;
+    const secondsView =
+      this.seconds < 10
+        ? '0' + this.seconds.toFixed(1)
+        : this.seconds.toFixed(1);
+
+    this.time = `${hoursView}:${minutesView}:${secondsView}`;
+  }
 
   public addScore() {
     this.scores.push({
