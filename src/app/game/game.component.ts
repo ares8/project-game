@@ -20,11 +20,12 @@ export class GameComponent {
   public minutes = 0;
   public hours = 0;
   public time = '00:00:00';
+  public interval!: ReturnType<typeof setInterval>;
   public name = '';
 
   public timeRecording() {
     this.seconds += 0.1;
-    if (this.seconds > 59) {
+    if (this.seconds > 59.99) {
       this.minutes++;
       this.seconds = 0;
     }
@@ -35,7 +36,7 @@ export class GameComponent {
     const hoursView = this.hours < 10 ? '0' + this.hours : this.hours;
     const minutesView = this.minutes < 10 ? '0' + this.minutes : this.minutes;
     const secondsView =
-      this.seconds < 10
+      this.seconds < 9.99
         ? '0' + this.seconds.toFixed(1)
         : this.seconds.toFixed(1);
 
@@ -54,18 +55,30 @@ export class GameComponent {
     this.points++;
   }
 
-  public onGameOver() {}
+  public onGameOver() {
+    this.addScore();
+    clearInterval(this.interval);
+  }
 
   public onStartButtonPressed() {
     this._snake.actionStart();
+    this.interval = setInterval(() => this.timeRecording(), 100);
   }
 
   public onStopButtonPressed() {
     this._snake.actionStop();
+    clearInterval(this.interval);
   }
 
   public onResetButtonPressed() {
     this._snake.actionReset();
+    this.addScore();
+    this.points = 0;
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.minutes = 0;
+    this.hours = 0;
+    this.time = '00:00:00';
   }
 
   public onUpButtonPressed() {
