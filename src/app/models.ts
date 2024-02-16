@@ -1,3 +1,8 @@
+export interface Login {
+  name: string;
+  email: string;
+}
+
 export interface Score {
   name: string;
   points: number;

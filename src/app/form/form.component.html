@@ -1,8 +1,8 @@
-<h1>Welcome to snake</h1>
+<h1>WELCOME TO SNAKE</h1>
 <p>USER NAME</p>
 <input [(ngModel)]="name" type="text" />
 <p>USER E-MAIL</p>
 <input [(ngModel)]="email" type="email" />
 <br />
 <br />
-<button [disabled]="!name || !email">GET STARTED</button>
+<button [disabled]="!name || !email" (click)="onSubmitPressed()">GET STARTED</button>

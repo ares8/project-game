@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
-import { GameHistory, Score } from '../models';
+import { GameHistory, Login, Score } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from '../form/form.component';
 
@@ -141,5 +141,9 @@ export class GameComponent {
     this.addHistory('right');
     this.upAndDown = false;
     this.rightAndLeft = true;
+  }
+
+  public addLoginInfo(player: Login) {
+    this.name = player.name;
   }
 }

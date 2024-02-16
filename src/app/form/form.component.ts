@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Login } from '../models';
 
 @Component({
   selector: 'app-form',
@@ -11,4 +12,18 @@ import { FormsModule } from '@angular/forms';
 export class FormComponent {
   public name = '';
   public email = '';
+
+  @Output()
+  public submit = new EventEmitter<Login>();
+
+  public onSubmitPressed() {
+    const loginInfo = {
+      name: this.name,
+      email: this.email,
+    };
+    this.submit.emit(loginInfo);
+
+    this.name = '';
+    this.email = '';
+  }
 }
