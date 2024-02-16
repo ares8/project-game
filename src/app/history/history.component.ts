@@ -21,4 +21,14 @@ export class HistoryComponent {
   public game = 'All';
   public sort = 'Desc';
   public action = 'All';
+
+  public reset() {
+    this.game = 'All';
+    this.sort = 'Desc';
+    this.action = 'All';
+  }
+
+  public resetAction() {
+    this.action = 'All';
+  }
 }

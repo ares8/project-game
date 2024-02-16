@@ -1,10 +1,10 @@
 <div>
-	<select [(ngModel)]="name" style="width:130px">
+	<select [(ngModel)]="name" style="width:130px" (change)="reset()">
 		<option>All</option>
 		<option *ngFor="let name of options.names">{{name}}</option>
 	</select>
 
-	<select [(ngModel)]="game" style="width:70px">
+	<select [(ngModel)]="game" style="width:70px" (change)="resetAction()">
 		<option>All</option>
 		<option *ngFor="let game of options.games[name]">{{game}}</option>
 	</select>

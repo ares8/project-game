@@ -4,11 +4,18 @@ import { GameHistory, Login, Options, Score } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from '../form/form.component';
 import { HistoryComponent } from '../history/history.component';
+import { ScoresComponent } from '../scores/scores.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NgxSnakeModule, CommonModule, FormComponent, HistoryComponent],
+  imports: [
+    NgxSnakeModule,
+    CommonModule,
+    FormComponent,
+    HistoryComponent,
+    ScoresComponent,
+  ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
@@ -92,9 +99,13 @@ export class GameComponent {
         this.options.names.push(this.name);
       }
       this.addOption(this.options.games, this.name, this.game);
+      this.addOption(this.options.games, 'All', this.game);
     }
 
     this.addOption(this.options.actions, this.name + this.game, action);
+    this.addOption(this.options.actions, 'All' + this.game, action);
+    this.addOption(this.options.actions, this.name + 'All', action);
+    this.addOption(this.options.actions, 'AllAll', action);
   }
 
   public onGrow() {
