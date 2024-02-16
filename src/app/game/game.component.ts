@@ -142,6 +142,7 @@ export class GameComponent {
         this.game = this.options.games[this.name][lastGameIndex] + 1;
       }
     }
+
     this._snake.actionStart();
     this.status = 'play';
     this.addHistory('start');
@@ -212,6 +213,10 @@ export class GameComponent {
   }
 
   public onExitButtonPressed() {
+    if (this.page === 'scores page' || this.page === 'history page') {
+      this.page = 'main page';
+      return;
+    }
     if (this.status === 'play' || this.status === 'pause') {
       this.addScore();
       this.addHistory('exit');
@@ -219,5 +224,21 @@ export class GameComponent {
     this.status = 'exit';
     this.onResetButtonPressed();
     this.page = 'intro';
+  }
+
+  public displayScores() {
+    if (this.page !== 'scores page') {
+      this.page = 'scores page';
+    } else {
+      this.page = 'main page';
+    }
+  }
+
+  public displayHistory() {
+    if (this.page !== 'history page') {
+      this.page = 'history page';
+    } else {
+      this.page = 'main page';
+    }
   }
 }

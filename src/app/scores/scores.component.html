@@ -1,3 +1,14 @@
+<div>
+	<select [(ngModel)]="name" (change)="reset()" style="width:130px">
+		<option>All</option>
+		<option *ngFor="let name of options.names">{{name}}</option>
+	</select>
+	<select [(ngModel)]="sort" style="width:70px">
+		<option>Desc</option>
+		<option>Asce</option>
+	</select>
+</div>
+
 <table>
 	<thead>
 		<tr>
