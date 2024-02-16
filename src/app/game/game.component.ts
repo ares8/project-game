@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { GameHistory, Score } from '../models';
 import { CommonModule } from '@angular/common';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NgxSnakeModule, CommonModule],
+  imports: [NgxSnakeModule, CommonModule, FormComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
