@@ -3,11 +3,12 @@ import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { GameHistory, Login, Score } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from '../form/form.component';
+import { HistoryComponent } from '../history/history.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NgxSnakeModule, CommonModule, FormComponent],
+  imports: [NgxSnakeModule, CommonModule, FormComponent, HistoryComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
@@ -83,6 +84,9 @@ export class GameComponent {
   }
 
   public onStartButtonPressed() {
+    if (this.status !== 'pause') {
+      this.onResetButtonPressed();
+    }
     this._snake.actionStart();
     this.status = 'play';
     this.addHistory('start');
@@ -101,8 +105,10 @@ export class GameComponent {
 
   public onResetButtonPressed() {
     this._snake.actionReset();
-    this.addScore();
-    this.addHistory('reset');
+    if (this.status === 'play' || this.status === 'pause') {
+      this.addHistory('reset');
+      this.addScore();
+    }
     this.status = 'ready';
     this.points = 0;
     clearInterval(this.interval);
@@ -150,6 +156,11 @@ export class GameComponent {
   }
 
   public onExitButtonPressed() {
+    if (this.status === 'play' || this.status === 'pause') {
+      this.addScore();
+      this.addHistory('exit');
+    }
+    this.status = 'exit';
     this.onResetButtonPressed();
     this.page = 'intro';
   }
