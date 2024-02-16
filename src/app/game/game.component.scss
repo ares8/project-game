@@ -1,0 +1,26 @@
+.gameboy {
+	position: relative;
+	height: 900px;
+	width: 540px;
+	background-color: #e5e5e5;
+	margin: auto;
+	border-radius: 25px 25px 100px 25px;
+	box-shadow: inset 0 0 5px 7px #ccc;
+	overflow: hidden;
+}
+
+.top-line {
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	border-bottom: 6px solid #cad2c5;
+}
+
+.back-line {
+	position: absolute;
+	width: 442px;
+	height: 40px;
+	left: 42px;
+	border-left: 6px solid #cad2c5;
+	border-right: 6px solid #cad2c5;
+}
