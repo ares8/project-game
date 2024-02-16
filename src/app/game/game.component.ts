@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { GameHistory, Score } from '../models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NgxSnakeModule],
+  imports: [NgxSnakeModule, CommonModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
@@ -22,6 +23,10 @@ export class GameComponent {
   public time = '00:00:00';
   public history: Array<GameHistory> = [];
   public interval!: ReturnType<typeof setInterval>;
+  public startAndStop = true;
+  public rightAndLeft = true;
+  public upAndDown = false;
+  public reset = true;
   public name = '';
   public game = 1;
 
@@ -72,6 +77,7 @@ export class GameComponent {
     this.status = 'game over';
     this.addHistory('game over');
     clearInterval(this.interval);
+    this.startAndStop = true;
   }
 
   public onStartButtonPressed() {
@@ -79,6 +85,8 @@ export class GameComponent {
     this.status = 'play';
     this.addHistory('start');
     this.interval = setInterval(() => this.timeRecording(), 100);
+    this.startAndStop = false;
+    this.reset = false;
   }
 
   public onStopButtonPressed() {
@@ -86,6 +94,7 @@ export class GameComponent {
     this.status = 'pause';
     this.addHistory('pause');
     clearInterval(this.interval);
+    this.startAndStop = true;
   }
 
   public onResetButtonPressed() {
@@ -99,25 +108,37 @@ export class GameComponent {
     this.minutes = 0;
     this.hours = 0;
     this.time = '00:00:00';
+    this.startAndStop = true;
+    this.rightAndLeft = true;
+    this.upAndDown = false;
+    this.reset = true;
   }
 
   public onUpButtonPressed() {
     this._snake.actionUp();
     this.addHistory('up');
+    this.upAndDown = true;
+    this.rightAndLeft = false;
   }
 
   public onDownButtonPressed() {
     this._snake.actionDown();
     this.addHistory('down');
+    this.upAndDown = true;
+    this.rightAndLeft = false;
   }
 
   public onLeftButtonPressed() {
     this._snake.actionLeft();
     this.addHistory('left');
+    this.upAndDown = false;
+    this.rightAndLeft = true;
   }
 
   public onRightButtonPressed() {
     this._snake.actionRight();
     this.addHistory('right');
+    this.upAndDown = false;
+    this.rightAndLeft = true;
   }
 }

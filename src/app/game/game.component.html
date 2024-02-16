@@ -6,10 +6,10 @@
 
 <ngx-snake (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
 
-<button (click)="onStartButtonPressed()">Start</button>
-<button (click)="onStopButtonPressed()">Stop</button>
-<button (click)="onResetButtonPressed()">Reset</button>
-<button (click)="onUpButtonPressed()">Up</button>
-<button (click)="onDownButtonPressed()">Down</button>
-<button (click)="onLeftButtonPressed()">Left</button>
-<button (click)="onRightButtonPressed()">Right</button>
+<button *ngIf="startAndStop" (click)="onStartButtonPressed()">Start</button>
+<button *ngIf="!startAndStop" (click)="onStopButtonPressed()">Stop</button>
+<button [disabled]="reset" (click)="onResetButtonPressed()">Reset</button>
+<button [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()">Up</button>
+<button [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()">Down</button>
+<button [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()">Left</button>
+<button [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()">Right</button>
