@@ -113,6 +113,11 @@ export class GameComponent {
   public onStartButtonPressed() {
     if (this.status !== 'pause') {
       this.onResetButtonPressed();
+      this.game = 1;
+      if (this.options.games?.[this.name]) {
+        const lastGameIndex = this.options.games[this.name].length - 1;
+        this.game = this.options.games[this.name][lastGameIndex] + 1;
+      }
     }
     this._snake.actionStart();
     this.status = 'play';
