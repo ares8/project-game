@@ -1,19 +1,24 @@
-<app-form (submit)="addLoginInfo($event)"></app-form>
+<app-form *ngIf="page==='intro'" (submit)="addLoginInfo($event)"></app-form>
 
-<p>HELLO {{name}}</p>
+<div *ngIf="page==='main page'">
+	<p>HELLO {{name}}</p>
 
-<div>
-	<p>STATUS: <br> {{status}}</p>
-	<p>TIME: <br> {{time}}</p>
-	<p>POINTS: <br> {{points}}</p>
+	<div>
+		<p>STATUS: <br> {{status}}</p>
+		<p>TIME: <br> {{time}}</p>
+		<p>POINTS: <br> {{points}}</p>
+	</div>
+
+	<ngx-snake (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
+
+	<button *ngIf="startAndStop" (click)="onStartButtonPressed()">Start</button>
+	<button *ngIf="!startAndStop" (click)="onStopButtonPressed()">Stop</button>
+	<button [disabled]="reset" (click)="onResetButtonPressed()">Reset</button>
+	<button [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()">Up</button>
+	<button [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()">Down</button>
+	<button [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()">Left</button>
+	<button [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()">Right</button>
+
+	<button (click)="onExitButtonPressed()">Exit</button>
+
 </div>
-
-<ngx-snake (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
-
-<button *ngIf="startAndStop" (click)="onStartButtonPressed()">Start</button>
-<button *ngIf="!startAndStop" (click)="onStopButtonPressed()">Stop</button>
-<button [disabled]="reset" (click)="onResetButtonPressed()">Reset</button>
-<button [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()">Up</button>
-<button [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()">Down</button>
-<button [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()">Left</button>
-<button [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()">Right</button>

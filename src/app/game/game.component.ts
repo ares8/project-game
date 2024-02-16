@@ -15,6 +15,7 @@ export class GameComponent {
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
 
+  public page = 'intro';
   public points = 0;
   public scores: Array<Score> = [];
   public status = 'ready';
@@ -144,6 +145,12 @@ export class GameComponent {
   }
 
   public addLoginInfo(player: Login) {
+    this.page = 'main page';
     this.name = player.name;
+  }
+
+  public onExitButtonPressed() {
+    this.onResetButtonPressed();
+    this.page = 'intro';
   }
 }
