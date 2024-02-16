@@ -1,18 +1,18 @@
 <table>
 	<thead>
 		<tr>
-			<th>NAME</th>
-			<th>GAME</th>
-			<th>TIME</th>
-			<th>ACTION</th>
+			<th style="width:130px">NAME</th>
+			<th style="width:70px">GAME</th>
+			<th style="width:100px">TIME</th>
+			<th style="width:100px">ACTION</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td style="width:130px"></td>
-			<td style="width:70px"></td>
-			<td style="width:100px"></td>
-			<td style="width:100px"></td>
+		<tr *ngFor="let player of players">
+			<td>{{player.name}}</td>
+			<td>{{player.game}}</td>
+			<td>{{player.time}}</td>
+			<td>{{player.action}}</td>
 		</tr>
 	</tbody>
 </table>

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
-import { GameHistory, Login, Score } from '../models';
+import { GameHistory, Login, Options, Score } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from '../form/form.component';
 import { HistoryComponent } from '../history/history.component';
@@ -32,6 +32,11 @@ export class GameComponent {
   public reset = true;
   public name = '';
   public game = 1;
+  public options: Options = {
+    names: [],
+    games: {},
+    actions: {},
+  };
 
   public timeRecording() {
     this.seconds += 0.1;
@@ -61,6 +66,19 @@ export class GameComponent {
     });
   }
 
+  public addOption(
+    obj: Record<string, Array<number | string>>,
+    key: string,
+    value: string | number
+  ) {
+    if (!obj[key]) {
+      obj[key] = [];
+      obj[key].push(value);
+    } else if (!obj[key].includes(value)) {
+      obj[key].push(value);
+    }
+  }
+
   public addHistory(action: string) {
     this.history.push({
       name: this.name,
@@ -68,6 +86,15 @@ export class GameComponent {
       action: action,
       time: this.time,
     });
+
+    if (action === 'start') {
+      if (!this.options.names.includes(this.name)) {
+        this.options.names.push(this.name);
+      }
+      this.addOption(this.options.games, this.name, this.game);
+    }
+
+    this.addOption(this.options.actions, this.name + this.game, action);
   }
 
   public onGrow() {
