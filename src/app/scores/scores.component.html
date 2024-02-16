@@ -8,11 +8,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+		<tr *ngFor="let player of players">
+			<td>{{player.position}}</td>
+			<td>{{player.name}}</td>
+			<td>{{player.points}}</td>
+			<td>{{player.time}}</td>
 		</tr>
 	</tbody>
 </table>

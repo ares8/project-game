@@ -31,6 +31,7 @@ export class GameComponent {
   public minutes = 0;
   public hours = 0;
   public time = '00:00:00';
+  public totalTimeInSeconds = 0;
   public history: Array<GameHistory> = [];
   public interval!: ReturnType<typeof setInterval>;
   public startAndStop = true;
@@ -47,6 +48,7 @@ export class GameComponent {
 
   public timeRecording() {
     this.seconds += 0.1;
+    this.totalTimeInSeconds += 0.1;
     if (this.seconds > 59.99) {
       this.minutes++;
       this.seconds = 0;
@@ -70,7 +72,17 @@ export class GameComponent {
       name: this.name,
       points: this.points,
       time: this.time,
+      totalTimeInSeconds: this.totalTimeInSeconds,
+      position: 0,
     });
+    this.scores
+      .sort((a, b) => {
+        if (a.points === b.points) {
+          return a.totalTimeInSeconds - b.totalTimeInSeconds;
+        }
+        return b.points - a.points;
+      })
+      .map((player, i) => (player.position = i + 1));
   }
 
   public addOption(
@@ -158,6 +170,7 @@ export class GameComponent {
     this.seconds = 0;
     this.minutes = 0;
     this.hours = 0;
+    this.totalTimeInSeconds = 0;
     this.time = '00:00:00';
     this.startAndStop = true;
     this.rightAndLeft = true;
