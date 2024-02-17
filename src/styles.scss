@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+ngx-snake {
+	position: absolute;
+	background: #91b40f;
+	box-sizing: border-box;
+	border-left: 3px solid #333;
+
+	&.black-and-white {
+		ngx-snake-tile {
+			background: #ffffff00;
+			border: none;
+
+			&.free {
+				div {
+					background: #ffffff00;
+
+				}
+			}
+
+			&.food {
+				div {
+					background: #222;
+					transform: rotate(45deg);
+				}
+			}
+
+			&.head,
+			&.tail,
+			&.body {
+				div {
+					background: #222;
+				}
+			}
+		}
+	}
+}

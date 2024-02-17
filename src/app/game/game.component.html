@@ -2,24 +2,30 @@
 	<div class="top-line"></div>
 	<div class="back-line"></div>
 
-	<div>
+	<div class="display">
 		<app-form *ngIf="page==='intro'" (submit)="addLoginInfo($event)"></app-form>
 
 		<div *ngIf="page==='main page'">
-			<p>HELLO {{name}}</p>
+			<div class="top-navbar">
+				<p>HELLO {{name}}</p>
+			</div>
 
-			<div>
+			<ngx-snake class="board black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
+
+			<div class="right-navbar">
 				<p>STATUS: <br> {{status}}</p>
 				<p>TIME: <br> {{time}}</p>
 				<p>POINTS: <br> {{points}}</p>
 			</div>
-
-			<ngx-snake (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
 		</div>
 
 		<app-scores *ngIf="page ==='scores page'" [players]="scores" [options]="options"></app-scores>
 
 		<app-history *ngIf="page ==='history page'" [players]="history" [options]="options"></app-history>
+
+		<div class="bottom-navbar" *ngIf="page !=='intro'">
+		</div>
+
 	</div>
 
 	<button *ngIf="startAndStop && page!=='intro'" [disabled]="page!=='main page'"

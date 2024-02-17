@@ -24,3 +24,72 @@
 	border-left: 6px solid #cad2c5;
 	border-right: 6px solid #cad2c5;
 }
+
+.display {
+	position: absolute;
+	width: 500px;
+	height: 420px;
+	left: 20px;
+	top: 65px;
+	background-color: #9999a1;
+	box-sizing: border-box;
+	border-radius: 25px;
+	box-shadow: inset 0px 0px 8px #eee;
+	border: 1px solid #999;
+}
+
+.top-navbar,
+.bottom-navbar {
+	position: absolute;
+	box-sizing: border-box;
+	font-family: 'VT323', system-ui, arial;
+	font-size: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 100%;
+	height: 40px;
+	width: 444px;
+	background-color: #555;
+	color: #a3ca11;
+	border: 3px solid #333;
+}
+
+.top-navbar {
+	left: 25px;
+	top: 20px;
+	font-size: 27.5px;
+}
+
+.board {
+	position: absolute;
+	left: 25px;
+	top: 60px;
+}
+
+.right-navbar {
+	position: absolute;
+	box-sizing: border-box;
+	font-family: 'VT323', monospace;
+	font-size: 25px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 297px;
+	width: 144px;
+	right: 29px;
+	top: 60px;
+	background-color: #333;
+	border-left: 3px solid #333;
+	border-right: 3px solid #333;
+	color: #9dc311;
+}
+
+.right-navbar p {
+	text-align: center;
+}
+
+.bottom-navbar {
+	left: 25px;
+	top: 357px;
+}
