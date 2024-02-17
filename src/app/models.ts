@@ -14,6 +14,7 @@ export interface Options {
   names: Array<string>;
   games: Record<string, Array<number>>;
   actions: Record<string, Array<string>>;
+  currentName: string;
 }
 
 export interface Score {

@@ -1,8 +1,12 @@
 <div class="history-page">
-	<div class="navbar-statistics">GAME HISTORY</div>
+	<div class="navbar-statistics"> <span>GAME HISTORY&nbsp;</span>
+		<label>[only me<input type="checkbox" [(ngModel)]="currentPlayer"
+				(change)="currentPlayer ? name = options.currentName : name ='All'; reset()" />]</label>
+		<span>&nbsp;- filter by:</span>
+	</div>
 
 	<div class="choise">
-		<select [(ngModel)]="name" (change)="reset()">
+		<select [disabled]="currentPlayer" [(ngModel)]="name" (change)="reset()">
 			<option>All</option>
 			<option *ngFor="let name of options.names">{{name}}</option>
 		</select>

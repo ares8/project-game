@@ -21,6 +21,7 @@ export class HistoryComponent {
   public game = 'All';
   public sort = 'Desc';
   public action = 'All';
+  public currentPlayer = false;
 
   public reset() {
     this.game = 'All';

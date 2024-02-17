@@ -44,6 +44,7 @@ export class GameComponent {
     names: [],
     games: {},
     actions: {},
+    currentName: '',
   };
 
   public timeRecording() {
@@ -210,6 +211,7 @@ export class GameComponent {
   public addLoginInfo(player: Login) {
     this.page = 'main page';
     this.name = player.name;
+    this.options.currentName = player.name;
   }
 
   public onExitButtonPressed() {
