@@ -28,10 +28,12 @@
 
 	</div>
 
-	<button *ngIf="startAndStop && page!=='intro'" [disabled]="page!=='main page'"
-		(click)="onStartButtonPressed()">Start</button>
-	<button *ngIf="!startAndStop" (click)="onStopButtonPressed()">Stop</button>
-	<button [disabled]="reset || page!=='main page'" (click)="onResetButtonPressed()">Reset</button>
+	<div class="place-A-B"></div>
+	<button class="A" *ngIf="startAndStop && page!=='intro'" [disabled]="page!=='main page'"
+		(click)="onStartButtonPressed()"></button>
+	<button class="A" *ngIf="!startAndStop" (click)="onStopButtonPressed()"></button>
+	<button class="B" [disabled]="reset || page!=='main page'" (click)="onResetButtonPressed()"></button>
+
 	<button [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()">Up</button>
 	<button [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()">Down</button>
 	<button [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()">Left</button>
