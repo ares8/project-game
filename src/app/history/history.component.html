@@ -1,40 +1,47 @@
-<div>
-	<select [(ngModel)]="name" style="width:130px" (change)="reset()">
-		<option>All</option>
-		<option *ngFor="let name of options.names">{{name}}</option>
-	</select>
+<div class="history-page">
+	<div class="navbar-statistics">GAME HISTORY</div>
 
-	<select [(ngModel)]="game" style="width:70px" (change)="resetAction()">
-		<option>All</option>
-		<option *ngFor="let game of options.games[name]">{{game}}</option>
-	</select>
+	<div class="choise">
+		<select [(ngModel)]="name" (change)="reset()">
+			<option>All</option>
+			<option *ngFor="let name of options.names">{{name}}</option>
+		</select>
 
-	<select [(ngModel)]="sort" style="width:100px">
-		<option>Desc</option>
-		<option>Asce</option>
-	</select>
+		<select [(ngModel)]="game" (change)="resetAction()">
+			<option>All</option>
+			<option *ngFor="let game of options.games[name]">{{game}}</option>
+		</select>
 
-	<select [(ngModel)]="action" style="width:100px">
-		<option>All</option>
-		<option *ngFor="let action of options.actions[name+game]">{{action}}</option>
-	</select>
+		<select [(ngModel)]="sort">
+			<option>Desc</option>
+			<option>Asce</option>
+		</select>
+
+		<select [(ngModel)]="action">
+			<option>All</option>
+			<option *ngFor="let action of options.actions[name+game]">{{action}}</option>
+		</select>
+	</div>
+
+	<div class="tab">
+		<table>
+			<thead>
+				<tr>
+					<th>NAME</th>
+					<th>GAME</th>
+					<th>TIME</th>
+					<th>ACTION</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let player of players">
+					<td>{{player.name}}</td>
+					<td class="td-k">{{player.game}}</td>
+					<td>{{player.time}}</td>
+					<td class="td-k">{{player.action}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 </div>
-
-<table>
-	<thead>
-		<tr>
-			<th style="width:130px">NAME</th>
-			<th style="width:70px">GAME</th>
-			<th style="width:100px">TIME</th>
-			<th style="width:100px">ACTION</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let player of players">
-			<td>{{player.name}}</td>
-			<td>{{player.game}}</td>
-			<td>{{player.time}}</td>
-			<td>{{player.action}}</td>
-		</tr>
-	</tbody>
-</table>

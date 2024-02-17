@@ -88,6 +88,7 @@ button span {
 	font-weight: bold;
 	color: #0077b6;
 	font-size: 16px;
+	pointer-events: none;
 }
 
 .A span {
@@ -103,4 +104,16 @@ button span {
 .history:hover,
 .exit-and-back:hover {
 	cursor: pointer;
+}
+
+.intro,
+.history-page {
+	position: absolute;
+	left: 25px;
+	top: 20px;
+	font-family: 'VT323', system-ui, arial;
+	font-size: 21px;
+	box-sizing: border-box;
+	border: 3px solid #333;
+	width: 444px;
 }
