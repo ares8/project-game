@@ -269,3 +269,68 @@
 .exit-and-back:active {
 	box-shadow: 0 1px 2px #111, inset 0px 1px 1px #b3a4a4;
 }
+
+.place-sound {
+	position: absolute;
+	height: 180px;
+	width: 240px;
+	left: 380px;
+	top: 842px;
+	rotate: -24deg;
+	background-color: #c9c7c3;
+	box-shadow: 0 -4px 5px 0 #c9c7c3;
+}
+
+.place-sound div {
+	position: absolute;
+	height: 90px;
+	width: 12px;
+	background-color: #d2cccc;
+	border-bottom: 2px solid #ddd6d6;
+	border-left: 2px solid #e5e5e5;
+	border-radius: 10px;
+	box-shadow: inset -2px 2px 4px #5b5858;
+}
+
+.place-sound div:nth-child(1) {
+	left: 40px;
+	top: -78px;
+}
+
+.place-sound div:nth-child(2) {
+	left: 65px;
+	top: -78px;
+}
+
+.place-sound div:nth-child(3) {
+	left: 90px;
+	top: -78px;
+}
+
+.place-sound div:nth-child(4) {
+	left: 115px;
+	top: -78px;
+}
+
+.place-sound div:nth-child(5) {
+	left: 140px;
+	top: -78px;
+}
+
+.place-sound div:nth-child(6) {
+	left: 165px;
+	top: -78px;
+}
+
+.place-sound div::after {
+	content: "";
+	position: absolute;
+	height: 16px;
+	width: 12px;
+	left: 0px;
+	top: 74px;
+	border-radius: 0 0 6px 6px;
+	background-color: #a2a19994;
+	background-color: #aaa6a6cd;
+	box-shadow: inset -2px -2px 3px #5b5858;
+}
