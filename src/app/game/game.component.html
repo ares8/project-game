@@ -43,7 +43,13 @@
 		<div class="middle-circle"></div>
 	</div>
 
-	<button [disabled]="page==='intro'" (click)="onExitButtonPressed()">Exit</button>
-	<button [disabled]="status==='play' || page==='intro'" (click)="displayScores()">Scores</button>
-	<button [disabled]="status==='play' || page==='intro'" (click)="displayHistory()">History</button>
+	<div class="place-scores">
+		<button class="scores" [disabled]="status==='play' || page==='intro'" (click)="displayScores()"></button>
+	</div>
+
+	<div class="place-history">
+		<button class="history" [disabled]="status==='play' || page==='intro'" (click)="displayHistory()"></button>
+	</div>
+
+	<button class="exit-and-back" [disabled]="page==='intro'" (click)="onExitButtonPressed()"></button>
 </div>
