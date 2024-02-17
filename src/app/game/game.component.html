@@ -34,10 +34,14 @@
 	<button class="A" *ngIf="!startAndStop" (click)="onStopButtonPressed()"></button>
 	<button class="B" [disabled]="reset || page!=='main page'" (click)="onResetButtonPressed()"></button>
 
-	<button [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()">Up</button>
-	<button [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()">Down</button>
-	<button [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()">Left</button>
-	<button [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()">Right</button>
+	<div class="outer-circle">
+		<button class="up" [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()"></button>
+		<button class="down" [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()"></button>
+		<button class="left" [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()"></button>
+		<button class="right" [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()"></button>
+		<div class="middle"></div>
+		<div class="middle-circle"></div>
+	</div>
 
 	<button [disabled]="page==='intro'" (click)="onExitButtonPressed()">Exit</button>
 	<button [disabled]="status==='play' || page==='intro'" (click)="displayScores()">Scores</button>

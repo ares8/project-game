@@ -125,7 +125,8 @@
 }
 
 .A:hover,
-.B:hover {
+.B:hover,
+.outer-circle button:hover {
 	cursor: pointer;
 }
 
@@ -137,4 +138,78 @@
 .B {
 	left: 410px;
 	top: 560px;
+}
+
+.outer-circle {
+	position: absolute;
+	height: 180px;
+	width: 180px;
+	border-radius: 50%;
+	left: 35px;
+	top: 530px;
+	background: linear-gradient(to top, #f4f3ee8f 25%, #c5c3c6a4 100%);
+}
+
+.outer-circle button {
+	position: absolute;
+	background-color: #222;
+	border: 2px solid #555;
+	border-bottom: none;
+	height: 50px;
+	width: 50px;
+	border-radius: 10px 10px 0px 0px;
+	box-shadow: 0 5px 13px #111, inset 0px 2px 5px #b3a4a4;
+	transition: 0.07s linear;
+	z-index: 1
+}
+
+.up {
+	left: 65px;
+	top: 19px;
+}
+
+.down {
+	rotate: 180deg;
+	left: 65px;
+	top: 111px;
+}
+
+.left {
+	rotate: -90deg;
+	left: 19px;
+	top: 65px;
+}
+
+.right {
+	rotate: 90deg;
+	left: 111px;
+	top: 65px;
+}
+
+.outer-circle button:active {
+	border-top: none;
+	box-shadow: 0 2px 3px #111, inset 0px 1px 2px #b3a4a4;
+}
+
+.middle {
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	background-color: #222;
+	left: 65px;
+	top: 65px;
+	border-radius: 11px;
+	z-index: 1
+}
+
+.middle-circle {
+	position: absolute;
+	height: 32px;
+	width: 32px;
+	left: 74px;
+	top: 74px;
+	border-radius: 50%;
+	background-color: #333;
+	box-shadow: inset 0px -3px 3px #555;
+	z-index: 1
 }
