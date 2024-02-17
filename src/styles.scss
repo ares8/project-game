@@ -38,3 +38,69 @@ ngx-snake {
 		}
 	}
 }
+
+.top-navbar,
+.bottom-navbar {
+	position: absolute;
+	box-sizing: border-box;
+	font-family: 'VT323', system-ui, arial;
+	font-size: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 100%;
+	height: 40px;
+	width: 444px;
+	background-color: #555;
+	color: #a3ca11;
+	border: 3px solid #333;
+}
+
+.bottom-navbar {
+	left: 25px;
+	top: 357px;
+}
+
+.A,
+.B,
+.exit-and-back {
+	position: absolute;
+	box-sizing: border-box;
+	background-color: #b32430;
+	border: 1px solid #d03d49;
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	box-shadow: 0 5px 9px #111, inset 0px 2px 5px #b3a4a4;
+	transition: 0.07s linear;
+	z-index: 1;
+}
+
+.A:active,
+.B:active {
+	box-shadow: 0 2px 3px #111, inset 0px 1px 2px #b3a4a4;
+}
+
+button span {
+	position: relative;
+	display: inline-block;
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	color: #0077b6;
+	font-size: 16px;
+}
+
+.A span {
+	top: 59px;
+	left: 21px;
+	rotate: -24deg;
+}
+
+.A:hover,
+.B:hover,
+.outer-circle button:hover,
+.scores:hover,
+.history:hover,
+.exit-and-back:hover {
+	cursor: pointer;
+}

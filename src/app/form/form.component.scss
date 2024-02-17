@@ -1,0 +1,93 @@
+.intro {
+	position: absolute;
+	left: 25px;
+	top: 20px;
+	font-family: 'VT323', system-ui, arial;
+	font-size: 21px;
+	box-sizing: border-box;
+	border: 3px solid #333;
+	width: 444px;
+	height: 340px;
+	background-color: #91b40f;
+}
+
+.A {
+	left: 271px;
+	top: 511px;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 6px outset #555;
+	margin: 10px auto 20px auto;
+	width: 350px;
+	height: 60px;
+	text-align: center;
+	background-color: #333;
+	color: #8bac0f;
+	font-size: 50px;
+	line-height: 100%;
+}
+
+.form {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	margin: 0px auto;
+	width: 330px;
+	height: 230px;
+}
+
+@mixin step($width, $color) {
+	box-shadow: $width 0 $color, -$width 0 $color, 0 (-$width) $color,
+		0 $width $color;
+	margin: $width auto;
+}
+
+input {
+	@include step(6px, black);
+	background-color: #8bac0f;
+	border: none;
+	padding: 5px;
+	font-family: "VT323", system-ui, arial;
+	font-size: 23px;
+	width: 320px;
+	margin-top: 0;
+}
+
+input:focus {
+	outline: none;
+}
+
+::spelling-error {
+	text-decoration: none;
+}
+
+p {
+	padding: 0px;
+	margin: 0px;
+	font-size: 26px;
+}
+
+.title-name,
+.title-email {
+	margin-bottom: 4px;
+	font-size: 28px;
+	font-weight: bold;
+	background-color: #444;
+	width: 128px;
+	color: #85a50e;
+	padding: 3px;
+	padding-left: 10px;
+}
+
+.title-name {
+	width: 105px;
+}
+
+.form div:nth-child(2) {
+	position: absolute;
+	top: 220px;
+}

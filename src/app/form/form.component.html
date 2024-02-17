@@ -1,8 +1,20 @@
-<h1>WELCOME TO SNAKE</h1>
-<p>USER NAME</p>
-<input [(ngModel)]="name" type="text" />
-<p>USER E-MAIL</p>
-<input [(ngModel)]="email" type="email" />
-<br />
-<br />
-<button [disabled]="!name || !email" (click)="onSubmitPressed()">Start</button>
+<div class="intro">
+	<div class="title">WELCOME TO SNAKE</div>
+	<div class="form">
+		<div>
+			<p class="title-name">USER NAME</p>
+			<input [(ngModel)]="name" type="text" />
+			<p class="help"></p>
+		</div>
+
+		<div>
+			<p class="title-email">USER E-MAIL</p>
+			<input [(ngModel)]="email" type="email" />
+			<p class="help"></p>
+		</div>
+
+		<button class="A" [disabled]="!name || !email" (click)="onSubmitPressed()"><span>START/<br />PAUSE</span></button>
+	</div>
+</div>
+
+<div class="bottom-navbar"></div>

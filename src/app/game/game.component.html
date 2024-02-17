@@ -30,9 +30,10 @@
 
 	<div class="place-A-B"></div>
 	<button class="A" *ngIf="startAndStop && page!=='intro'" [disabled]="page!=='main page'"
-		(click)="onStartButtonPressed()"></button>
-	<button class="A" *ngIf="!startAndStop" (click)="onStopButtonPressed()"></button>
-	<button class="B" [disabled]="reset || page!=='main page'" (click)="onResetButtonPressed()"></button>
+		(click)="onStartButtonPressed()"><span>START/<br />PAUSE</span></button>
+	<button class="A" *ngIf="!startAndStop" (click)="onStopButtonPressed()"><span>START/<br />PAUSE</span></button>
+	<button class="B" [disabled]="reset || page!=='main page'"
+		(click)="onResetButtonPressed()"><span>RESET</span></button>
 
 	<div class="outer-circle">
 		<button class="up" [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()"></button>
@@ -44,14 +45,17 @@
 	</div>
 
 	<div class="place-scores">
-		<button class="scores" [disabled]="status==='play' || page==='intro'" (click)="displayScores()"></button>
+		<button class="scores" [disabled]="status==='play' || page==='intro'"
+			(click)="displayScores()"><span>SCORES</span></button>
 	</div>
 
 	<div class="place-history">
-		<button class="history" [disabled]="status==='play' || page==='intro'" (click)="displayHistory()"></button>
+		<button class="history" [disabled]="status==='play' || page==='intro'"
+			(click)="displayHistory()"><span>HISTORY</span></button>
 	</div>
 
-	<button class="exit-and-back" [disabled]="page==='intro'" (click)="onExitButtonPressed()"></button>
+	<button class="exit-and-back" [disabled]="page==='intro'" (click)="onExitButtonPressed()"><span>EXIT /
+			BACK</span></button>
 
 	<div class="place-sound">
 		<div></div>
