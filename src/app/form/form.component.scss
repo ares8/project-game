@@ -23,7 +23,7 @@
 	line-height: 100%;
 }
 
-.form {
+form {
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
@@ -49,6 +49,14 @@ input {
 	margin-top: 0;
 }
 
+input {
+	&.ng-touched {
+		&.ng-invalid {
+			background-color: #aaa;
+		}
+	}
+}
+
 input:focus {
 	outline: none;
 }
@@ -61,6 +69,10 @@ p {
 	padding: 0px;
 	margin: 0px;
 	font-size: 26px;
+}
+
+.help p {
+	font-size: 22px;
 }
 
 .title-name,
@@ -79,7 +91,7 @@ p {
 	width: 105px;
 }
 
-.form div:nth-child(2) {
+form div:nth-child(2) {
 	position: absolute;
-	top: 220px;
+	top: 230px;
 }
