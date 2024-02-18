@@ -46,6 +46,7 @@ export class GameComponent {
     actions: {},
     currentName: '',
   };
+  public message = "IF YOU ARE READY PRESS 'START'";
 
   public timeRecording() {
     this.seconds += 0.1;
@@ -132,6 +133,7 @@ export class GameComponent {
     this.addHistory('game over');
     clearInterval(this.interval);
     this.startAndStop = true;
+    this.message = 'YOU LOST :( TRY AGAIN';
   }
 
   public onStartButtonPressed() {
@@ -150,6 +152,7 @@ export class GameComponent {
     this.interval = setInterval(() => this.timeRecording(), 100);
     this.startAndStop = false;
     this.reset = false;
+    this.message = 'GOOD LUCK!';
   }
 
   public onStopButtonPressed() {
@@ -158,6 +161,7 @@ export class GameComponent {
     this.addHistory('pause');
     clearInterval(this.interval);
     this.startAndStop = true;
+    this.message = 'YOU MUST REST?';
   }
 
   public onResetButtonPressed() {
@@ -178,6 +182,7 @@ export class GameComponent {
     this.rightAndLeft = true;
     this.upAndDown = false;
     this.reset = true;
+    this.message = "IF YOU ARE READY PRESS 'START'";
   }
 
   public onUpButtonPressed() {
@@ -217,6 +222,7 @@ export class GameComponent {
   public onExitButtonPressed() {
     if (this.page === 'scores page' || this.page === 'history page') {
       this.page = 'main page';
+      this.message = "IF YOU ARE READY PRESS 'START'";
       return;
     }
     if (this.status === 'play' || this.status === 'pause') {
@@ -231,16 +237,20 @@ export class GameComponent {
   public displayScores() {
     if (this.page !== 'scores page') {
       this.page = 'scores page';
+      this.message = "PRESS 'SCORES' OR 👇 TO RETURN";
     } else {
       this.page = 'main page';
+      this.message = "IF YOU ARE READY PRESS 'START'";
     }
   }
 
   public displayHistory() {
     if (this.page !== 'history page') {
       this.page = 'history page';
+      this.message = "PRESS 'HISTORY' OR 👇 TO RETURN";
     } else {
       this.page = 'main page';
+      this.message = "IF YOU ARE READY PRESS 'START'";
     }
   }
 }

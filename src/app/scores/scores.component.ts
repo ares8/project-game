@@ -19,6 +19,7 @@ export class ScoresComponent {
 
   public name = 'All';
   public sort = 'Desc';
+  public currentPlayer = false;
 
   public reset() {
     this.sort = 'Desc';

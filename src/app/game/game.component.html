@@ -5,9 +5,9 @@
 	<div class="display">
 		<app-form *ngIf="page==='intro'" (submit)="addLoginInfo($event)"></app-form>
 
-		<div *ngIf="page==='main page'">
+		<div [class.main-hidden]="page!=='main page'">
 			<div class="top-navbar">
-				<p>HELLO {{name}}</p>
+				<p>🐍HELLO {{name}}</p>
 			</div>
 
 			<ngx-snake class="board black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
@@ -24,6 +24,7 @@
 		<app-history *ngIf="page ==='history page'" [players]="history" [options]="options"></app-history>
 
 		<div class="bottom-navbar" *ngIf="page !=='intro'">
+			<p>{{message}}</p>
 		</div>
 
 	</div>

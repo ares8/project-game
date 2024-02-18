@@ -1,7 +1,13 @@
 <div class="scores-page">
+	<div class="navbar-statistics"> <span>HIGH SCORES&nbsp;</span>
+		<label>[only me <input type="checkbox" [(ngModel)]="currentPlayer"
+				(change)="currentPlayer ? name = options.currentName : name ='All'; reset()" />]</label>
+		<span>&nbsp;- filter by:</span>
+	</div>
+
 	<div class="choise">
 		<label> Name
-			<select class="s1" [(ngModel)]="name" (change)="reset()">
+			<select class="s1" [disabled]="currentPlayer" [(ngModel)]="name" (change)="reset()">
 				<option>All</option>
 				<option *ngFor="let name of options.names">{{name}}</option>
 			</select>
