@@ -8,6 +8,7 @@ export interface GameHistory {
   game: number;
   action: string;
   time: string;
+  id: number;
 }
 
 export interface Options {

@@ -11,20 +11,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './form.component.scss',
 })
 export class FormComponent {
-  public name = '';
-  public email = '';
-
   @Output()
   public submit = new EventEmitter<Login>();
-
-  public onSubmitPressed() {
-    const loginInfo = {
-      name: this.name,
-      email: this.email,
-    };
-    this.submit.emit(loginInfo);
-
-    this.name = '';
-    this.email = '';
-  }
 }

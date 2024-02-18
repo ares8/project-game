@@ -38,8 +38,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let player of players">
+				<tr *ngFor="let player of players | filterAndSortHistory:name:game:action:sort; let first = first">
+					@if(name === 'All') {
 					<td>{{player.name}}</td>
+					}@else {
+					<td class="td-n" *ngIf="first" [attr.rowspan]="players.length">{{player.name}}</td>
+					}
 					<td class="td-k">{{player.game}}</td>
 					<td>{{player.time}}</td>
 					<td class="td-k">{{player.action}}</td>

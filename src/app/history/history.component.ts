@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { GameHistory, Options } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FilterAndSortHistoryPipe } from '../pipes/filter-and-sort-history.pipe';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FilterAndSortHistoryPipe],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss',
 })

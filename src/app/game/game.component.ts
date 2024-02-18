@@ -46,6 +46,7 @@ export class GameComponent {
     actions: {},
     currentName: '',
   };
+  public historyId = 0;
   public message = "IF YOU ARE READY PRESS 'START'";
 
   public timeRecording() {
@@ -77,14 +78,6 @@ export class GameComponent {
       totalTimeInSeconds: this.totalTimeInSeconds,
       position: 0,
     });
-    this.scores
-      .sort((a, b) => {
-        if (a.points === b.points) {
-          return a.totalTimeInSeconds - b.totalTimeInSeconds;
-        }
-        return b.points - a.points;
-      })
-      .map((player, i) => (player.position = i + 1));
   }
 
   public addOption(
@@ -106,12 +99,15 @@ export class GameComponent {
       game: this.game,
       action: action,
       time: this.time,
+      id: this.historyId,
     });
+    this.historyId++;
 
     if (action === 'start') {
       if (!this.options.names.includes(this.name)) {
         this.options.names.push(this.name);
       }
+
       this.addOption(this.options.games, this.name, this.game);
       this.addOption(this.options.games, 'All', this.game);
     }
