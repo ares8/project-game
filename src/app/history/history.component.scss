@@ -12,62 +12,6 @@
 	line-height: 100%;
 }
 
-.choise {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 25px;
-	background-color: #777;
-}
-
-.tab {
-	background-color: #8bac0f;
-	height: 272px;
-	overflow: auto;
-	overflow-x: auto;
-}
-
-div table {
-	border-collapse: collapse;
-}
-
-select {
-	height: 25px;
-	background-color: #999;
-	font-family: 'VT323', system-ui, arial;
-	font-size: 21px;
-}
-
-select:focus {
-	outline: none;
-}
-
-input[type='checkbox'] {
-	accent-color: black;
-}
-
-thead th {
-	position: sticky;
-	top: 0;
-}
-
-th,
-td {
-	border-bottom: 1px solid #333;
-}
-
-th {
-	font-size: 24px;
-	background-color: #333;
-	color: #8bac0f;
-}
-
-td {
-	color: #000;
-	padding-left: 7px;
-	padding-right: 5px;
-}
-
 th:nth-child(1),
 select:nth-child(1) {
 	width: 195px;
@@ -93,10 +37,6 @@ select:nth-child(2) {
 
 select:nth-child(4) {
 	min-width: 92px;
-}
-
-.td-k {
-	background-color: #a3ca11;
 }
 
 .td-n {

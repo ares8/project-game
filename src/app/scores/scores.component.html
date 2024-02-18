@@ -1,29 +1,38 @@
-<div>
-	<select [(ngModel)]="name" (change)="reset()" style="width:130px">
-		<option>All</option>
-		<option *ngFor="let name of options.names">{{name}}</option>
-	</select>
-	<select [(ngModel)]="sort" style="width:70px">
-		<option>Desc</option>
-		<option>Asce</option>
-	</select>
-</div>
+<div class="scores-page">
+	<div class="choise">
+		<label> Name
+			<select class="s1" [(ngModel)]="name" (change)="reset()">
+				<option>All</option>
+				<option *ngFor="let name of options.names">{{name}}</option>
+			</select>
+		</label>
+		<label> Points
+			<select class="s2" [(ngModel)]="sort">
+				<option>Desc</option>
+				<option>Asce</option>
+			</select>
+		</label>
+	</div>
 
-<table>
-	<thead>
-		<tr>
-			<th style="width:70px">NR</th>
-			<th style="width:130px">NAME</th>
-			<th style="width:100px">POINTS</th>
-			<th style="width:100px">TIME</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let player of players">
-			<td>{{player.position}}</td>
-			<td>{{player.name}}</td>
-			<td>{{player.points}}</td>
-			<td>{{player.time}}</td>
-		</tr>
-	</tbody>
-</table>
+	<div class="tab">
+		<table>
+			<thead>
+				<tr>
+					<th>NR</th>
+					<th>NAME</th>
+					<th>POINTS</th>
+					<th>TIME</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let player of players">
+					<td>{{player.position}}</td>
+					<td class="td-k">{{player.name}}</td>
+					<td>{{player.points}}</td>
+					<td class="td-k">{{player.time}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
