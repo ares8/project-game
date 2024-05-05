@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
-import { GameHistory, Login, Options, Score } from '../models';
-import { CommonModule } from '@angular/common';
-import { FormComponent } from '../form/form.component';
+import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
 import { ScoresComponent } from '../scores/scores.component';
+import { GameHistory, Login, Options, Score } from '../models';
 
 @Component({
   selector: 'app-game',

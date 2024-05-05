@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { Options, Score } from '../models';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FilterAndSortScoresPipe } from '../pipes/filter-and-sort-scores.pipe';
+import { Options, Score } from '../models';
 
 @Component({
   selector: 'app-scores',
