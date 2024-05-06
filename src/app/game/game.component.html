@@ -3,13 +3,8 @@
 		<div class="top-navbar">
 			<p>🐍HELLO {{name}}</p>
 		</div>
-		<ngx-snake class="board black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
-
-		<div class="right-navbar">
-			<p>STATUS: <br> {{active.status}}</p>
-			<p>TIME: <br> {{time}}</p>
-			<p>POINTS: <br> {{points}}</p>
-		</div>
+		<ngx-snake class="black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
+		<app-game-info [info]="gameInfo"></app-game-info>
 	</div>
 
 	<div class="bottom-navbar">

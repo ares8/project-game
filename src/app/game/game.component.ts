@@ -8,11 +8,13 @@ import {
   ActiveButtons,
   GameActions,
   GameHistory,
+  GameInfo,
   Login,
   Options,
   Score,
 } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
+import { GameInfoComponent } from './game-info/game-info.component';
 
 @Component({
   selector: 'app-game',
@@ -24,6 +26,7 @@ import { ButtonsComponent } from '../buttons/buttons.component';
     HistoryComponent,
     ScoresComponent,
     ButtonsComponent,
+    GameInfoComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -33,12 +36,10 @@ export class GameComponent {
   private _snake!: NgxSnakeComponent;
 
   public page = 'intro';
-  public points = 0;
   public scores: Array<Score> = [];
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
-  public time = '00:00:00';
   public totalTimeInSeconds = 0;
   public history: Array<GameHistory> = [];
   public interval!: ReturnType<typeof setInterval>;
@@ -52,7 +53,11 @@ export class GameComponent {
   };
   public historyId = 0;
   public message = "IF YOU ARE READY PRESS 'START'";
-
+  public gameInfo: GameInfo = {
+    status: 'ready',
+    time: '00:00:00',
+    points: 0,
+  };
   public active: ActiveButtons = {
     startAndStop: true,
     upAndDown: false,
@@ -60,6 +65,11 @@ export class GameComponent {
     reset: true,
     status: 'ready',
   };
+
+  public addStatus(status: string) {
+    this.active.status = status;
+    this.gameInfo.status = status;
+  }
 
   public timeRecording() {
     this.seconds += 0.1;
@@ -79,14 +89,14 @@ export class GameComponent {
         ? '0' + this.seconds.toFixed(1)
         : this.seconds.toFixed(1);
 
-    this.time = `${hoursView}:${minutesView}:${secondsView}`;
+    this.gameInfo.time = `${hoursView}:${minutesView}:${secondsView}`;
   }
 
   public addScore() {
     this.scores.push({
       name: this.name,
-      points: this.points,
-      time: this.time,
+      points: this.gameInfo.points,
+      time: this.gameInfo.time,
       totalTimeInSeconds: this.totalTimeInSeconds,
       position: 0,
     });
@@ -110,7 +120,7 @@ export class GameComponent {
       name: this.name,
       game: this.game,
       action: action,
-      time: this.time,
+      time: this.gameInfo.time,
       id: this.historyId,
     });
     this.historyId++;
@@ -131,13 +141,13 @@ export class GameComponent {
   }
 
   public onGrow() {
-    this.points++;
+    this.gameInfo.points++;
     this.addHistory('grow');
   }
 
   public onGameOver() {
     this.addScore();
-    this.active.status = 'game over';
+    this.addStatus('game over');
     this.addHistory('game over');
     clearInterval(this.interval);
     this.active.startAndStop = true;
@@ -155,7 +165,7 @@ export class GameComponent {
     }
 
     this._snake.actionStart();
-    this.active.status = 'play';
+    this.addStatus('play');
     this.addHistory('start');
     this.interval = setInterval(() => this.timeRecording(), 100);
     this.active.startAndStop = false;
@@ -165,7 +175,7 @@ export class GameComponent {
 
   public onStopButtonPressed() {
     this._snake.actionStop();
-    this.active.status = 'pause';
+    this.addStatus('pause');
     this.addHistory('pause');
     clearInterval(this.interval);
     this.active.startAndStop = true;
@@ -178,14 +188,14 @@ export class GameComponent {
       this.addHistory('reset');
       this.addScore();
     }
-    this.active.status = 'ready';
-    this.points = 0;
+    this.addStatus('ready');
+    this.gameInfo.points = 0;
     clearInterval(this.interval);
     this.seconds = 0;
     this.minutes = 0;
     this.hours = 0;
     this.totalTimeInSeconds = 0;
-    this.time = '00:00:00';
+    this.gameInfo.time = '00:00:00';
     this.active.startAndStop = true;
     this.active.rightAndLeft = true;
     this.active.upAndDown = false;
@@ -237,7 +247,7 @@ export class GameComponent {
       this.addScore();
       this.addHistory('exit');
     }
-    this.active.status = 'exit';
+    this.addStatus('exit');
     this.onResetButtonPressed();
     this.page = 'intro';
   }

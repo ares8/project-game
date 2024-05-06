@@ -34,12 +34,6 @@ button span {
 	rotate: -24deg;
 }
 
-.B span {
-	top: 51px;
-	left: 18px;
-	rotate: -24deg;
-}
-
 .A:hover,
 .B:hover,
 .outer-circle button:hover,
@@ -55,19 +49,25 @@ button span {
 	width: 180px;
 	background: linear-gradient(to top, #f4f3ee 25%, #c5c3c6 100%);
 	rotate: -24deg;
-	left: 305px;
-	top: 570px;
+	left: 284px;
+	top: 504px;
 	border-radius: 50px;
 }
 
 .A {
-	left: 320px;
-	top: 600px;
+	left: 299px;
+	top: 534px;
 }
 
 .B {
-	left: 410px;
-	top: 560px;
+	left: 389px;
+	top: 494px;
+}
+
+.B span {
+	top: 51px;
+	left: 18px;
+	rotate: -24deg;
 }
 
 .outer-circle {
@@ -75,8 +75,8 @@ button span {
 	height: 180px;
 	width: 180px;
 	border-radius: 50%;
-	left: 35px;
-	top: 530px;
+	left: 14px;
+	top: 464px;
 	background: linear-gradient(to top, #f4f3ee8f 25%, #c5c3c6a4 100%);
 }
 
@@ -155,13 +155,13 @@ button span {
 }
 
 .place-scores {
-	left: 145px;
-	top: 740px;
+	left: 124px;
+	top: 674px;
 }
 
 .place-history {
-	left: 253px;
-	top: 740px;
+	left: 232px;
+	top: 674px;
 }
 
 .scores,
@@ -194,8 +194,8 @@ button span {
 	box-shadow: 0 4px 7px #111, inset 0px 1px 4px #b3a4a4;
 	height: 35px;
 	width: 35px;
-	left: 295px;
-	top: 510px;
+	left: 274px;
+	top: 444px;
 }
 
 .exit-and-back:active {

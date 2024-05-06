@@ -46,3 +46,9 @@ export interface GameActions {
   onHistoryButtonPressed: () => void;
   onExitButtonPressed: () => void;
 }
+
+export interface GameInfo {
+  status: string;
+  time: string;
+  points: number;
+}
