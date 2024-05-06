@@ -1,69 +1,46 @@
-<div class="gameboy">
-	<div class="top-line"></div>
-	<div class="back-line"></div>
-
-	<div class="display">
-		<app-form *ngIf="page==='intro'" (submit)="addLoginInfo($event)"></app-form>
-
-		<div [class.main-hidden]="page!=='main page'">
-			<div class="top-navbar">
-				<p>🐍HELLO {{name}}</p>
-			</div>
-
-			<ngx-snake class="board black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
-
-			<div class="right-navbar">
-				<p>STATUS: <br> {{status}}</p>
-				<p>TIME: <br> {{time}}</p>
-				<p>POINTS: <br> {{points}}</p>
-			</div>
+<div>
+	<div>
+		<div class="top-navbar">
+			<p>🐍HELLO {{name}}</p>
 		</div>
+		<ngx-snake class="board black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
 
-		<app-scores *ngIf="page ==='scores page'" [players]="scores" [options]="options"></app-scores>
-
-		<app-history *ngIf="page ==='history page'" [players]="history" [options]="options"></app-history>
-
-		<div class="bottom-navbar" *ngIf="page !=='intro'">
-			<p>{{message}}</p>
+		<div class="right-navbar">
+			<p>STATUS: <br> {{status}}</p>
+			<p>TIME: <br> {{time}}</p>
+			<p>POINTS: <br> {{points}}</p>
 		</div>
-
 	</div>
 
-	<div class="place-A-B"></div>
-	<button class="A" *ngIf="startAndStop && page!=='intro'" [disabled]="page!=='main page'"
-		(click)="onStartButtonPressed()"><span>START/<br />PAUSE</span></button>
-	<button class="A" *ngIf="!startAndStop" (click)="onStopButtonPressed()"><span>START/<br />PAUSE</span></button>
-	<button class="B" [disabled]="reset || page!=='main page'"
-		(click)="onResetButtonPressed()"><span>RESET</span></button>
-
-	<div class="outer-circle">
-		<button class="up" [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()"></button>
-		<button class="down" [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()"></button>
-		<button class="left" [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()"></button>
-		<button class="right" [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()"></button>
-		<div class="middle"></div>
-		<div class="middle-circle"></div>
-	</div>
-
-	<div class="place-scores">
-		<button class="scores" [disabled]="status==='play' || page==='intro'"
-			(click)="displayScores()"><span>SCORES</span></button>
-	</div>
-
-	<div class="place-history">
-		<button class="history" [disabled]="status==='play' || page==='intro'"
-			(click)="displayHistory()"><span>HISTORY</span></button>
-	</div>
-
-	<button class="exit-and-back" [disabled]="page==='intro'" (click)="onExitButtonPressed()"><span>EXIT /
-			BACK</span></button>
-
-	<div class="place-sound">
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
+	<div class="bottom-navbar">
+		<p>{{message}}</p>
 	</div>
 </div>
+
+<div class="place-A-B"></div>
+<button class="A" *ngIf="startAndStop && page!=='intro'" [disabled]="page!=='main page'"
+	(click)="onStartButtonPressed()"><span>START/<br />PAUSE</span></button>
+<button class="A" *ngIf="!startAndStop" (click)="onStopButtonPressed()"><span>START/<br />PAUSE</span></button>
+<button class="B" [disabled]="reset || page!=='main page'" (click)="onResetButtonPressed()"><span>RESET</span></button>
+
+<div class="outer-circle">
+	<button class="up" [disabled]="startAndStop || upAndDown" (click)="onUpButtonPressed()"></button>
+	<button class="down" [disabled]="startAndStop || upAndDown" (click)="onDownButtonPressed()"></button>
+	<button class="left" [disabled]="startAndStop || rightAndLeft" (click)="onLeftButtonPressed()"></button>
+	<button class="right" [disabled]="startAndStop || rightAndLeft" (click)="onRightButtonPressed()"></button>
+	<div class="middle"></div>
+	<div class="middle-circle"></div>
+</div>
+
+<div class="place-scores">
+	<button class="scores" [disabled]="status==='play' || page==='intro'"
+		(click)="displayScores()"><span>SCORES</span></button>
+</div>
+
+<div class="place-history">
+	<button class="history" [disabled]="status==='play' || page==='intro'"
+		(click)="displayHistory()"><span>HISTORY</span></button>
+</div>
+
+<button class="exit-and-back" [disabled]="page==='intro'" (click)="onExitButtonPressed()"><span>EXIT /
+		BACK</span></button>
