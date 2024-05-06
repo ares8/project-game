@@ -1,0 +1,32 @@
+<div class="place-A-B"></div>
+<button class="A" *ngIf="active?.startAndStop" [disabled]=""
+	(click)="addAction('onStartButtonPressed')"><span>START/<br />PAUSE</span></button>
+<button class="A" *ngIf="!active?.startAndStop"
+	(click)="addAction('onStopButtonPressed')"><span>START/<br />PAUSE</span></button>
+<button class="B" [disabled]="active?.reset" (click)="addAction('onResetButtonPressed')"><span>RESET</span></button>
+
+<div class="outer-circle">
+	<button class="up" [disabled]="active?.startAndStop || active?.upAndDown"
+		(click)="addAction('onUpButtonPressed')"></button>
+	<button class="down" [disabled]="active?.startAndStop || active?.upAndDown"
+		(click)="addAction('onDownButtonPressed')"></button>
+	<button class="left" [disabled]="active?.startAndStop || active?.rightAndLeft"
+		(click)="addAction('onLeftButtonPressed')"></button>
+	<button class="right" [disabled]="active?.startAndStop || active?.rightAndLeft"
+		(click)="addAction('onRightButtonPressed')"></button>
+	<div class="middle"></div>
+	<div class="middle-circle"></div>
+</div>
+
+<div class="place-scores">
+	<button class="scores" [disabled]="active?.status==='play'"
+		(click)="addAction('onScoresButtonPressed')"><span>SCORES</span></button>
+</div>
+
+<div class="place-history">
+	<button class="history" [disabled]="active?.status==='play'"
+		(click)="addAction('onHistoryButtonPressed')"><span>HISTORY</span></button>
+</div>
+
+<button class="exit-and-back" [disabled]="" (click)="addAction('onExitButtonPressed')"><span>EXIT /
+		BACK</span></button>

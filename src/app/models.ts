@@ -25,3 +25,24 @@ export interface Score {
   totalTimeInSeconds: number;
   position: number;
 }
+
+export interface ActiveButtons {
+  startAndStop: boolean;
+  upAndDown: boolean;
+  rightAndLeft: boolean;
+  reset: boolean;
+  status: string;
+}
+
+export interface GameActions {
+  onStartButtonPressed: () => void;
+  onStopButtonPressed: () => void;
+  onResetButtonPressed: () => void;
+  onUpButtonPressed: () => void;
+  onDownButtonPressed: () => void;
+  onLeftButtonPressed: () => void;
+  onRightButtonPressed: () => void;
+  onScoresButtonPressed: () => void;
+  onHistoryButtonPressed: () => void;
+  onExitButtonPressed: () => void;
+}

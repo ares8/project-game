@@ -4,7 +4,15 @@ import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
 import { ScoresComponent } from '../scores/scores.component';
-import { GameHistory, Login, Options, Score } from '../models';
+import {
+  ActiveButtons,
+  GameActions,
+  GameHistory,
+  Login,
+  Options,
+  Score,
+} from '../models';
+import { ButtonsComponent } from '../buttons/buttons.component';
 
 @Component({
   selector: 'app-game',
@@ -15,6 +23,7 @@ import { GameHistory, Login, Options, Score } from '../models';
     FormComponent,
     HistoryComponent,
     ScoresComponent,
+    ButtonsComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -26,7 +35,6 @@ export class GameComponent {
   public page = 'intro';
   public points = 0;
   public scores: Array<Score> = [];
-  public status = 'ready';
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
@@ -34,10 +42,6 @@ export class GameComponent {
   public totalTimeInSeconds = 0;
   public history: Array<GameHistory> = [];
   public interval!: ReturnType<typeof setInterval>;
-  public startAndStop = true;
-  public rightAndLeft = true;
-  public upAndDown = false;
-  public reset = true;
   public name = '';
   public game = 1;
   public options: Options = {
@@ -48,6 +52,14 @@ export class GameComponent {
   };
   public historyId = 0;
   public message = "IF YOU ARE READY PRESS 'START'";
+
+  public active: ActiveButtons = {
+    startAndStop: true,
+    upAndDown: false,
+    rightAndLeft: true,
+    reset: true,
+    status: 'ready',
+  };
 
   public timeRecording() {
     this.seconds += 0.1;
@@ -125,15 +137,15 @@ export class GameComponent {
 
   public onGameOver() {
     this.addScore();
-    this.status = 'game over';
+    this.active.status = 'game over';
     this.addHistory('game over');
     clearInterval(this.interval);
-    this.startAndStop = true;
+    this.active.startAndStop = true;
     this.message = 'YOU LOST :( TRY AGAIN';
   }
 
   public onStartButtonPressed() {
-    if (this.status !== 'pause') {
+    if (this.active.status !== 'pause') {
       this.onResetButtonPressed();
       this.game = 1;
       if (this.options.games?.[this.name]) {
@@ -143,30 +155,30 @@ export class GameComponent {
     }
 
     this._snake.actionStart();
-    this.status = 'play';
+    this.active.status = 'play';
     this.addHistory('start');
     this.interval = setInterval(() => this.timeRecording(), 100);
-    this.startAndStop = false;
-    this.reset = false;
+    this.active.startAndStop = false;
+    this.active.reset = false;
     this.message = 'GOOD LUCK!';
   }
 
   public onStopButtonPressed() {
     this._snake.actionStop();
-    this.status = 'pause';
+    this.active.status = 'pause';
     this.addHistory('pause');
     clearInterval(this.interval);
-    this.startAndStop = true;
+    this.active.startAndStop = true;
     this.message = 'YOU MUST REST?';
   }
 
   public onResetButtonPressed() {
     this._snake.actionReset();
-    if (this.status === 'play' || this.status === 'pause') {
+    if (this.active.status === 'play' || this.active.status === 'pause') {
       this.addHistory('reset');
       this.addScore();
     }
-    this.status = 'ready';
+    this.active.status = 'ready';
     this.points = 0;
     clearInterval(this.interval);
     this.seconds = 0;
@@ -174,39 +186,39 @@ export class GameComponent {
     this.hours = 0;
     this.totalTimeInSeconds = 0;
     this.time = '00:00:00';
-    this.startAndStop = true;
-    this.rightAndLeft = true;
-    this.upAndDown = false;
-    this.reset = true;
+    this.active.startAndStop = true;
+    this.active.rightAndLeft = true;
+    this.active.upAndDown = false;
+    this.active.reset = true;
     this.message = "IF YOU ARE READY PRESS 'START'";
   }
 
   public onUpButtonPressed() {
     this._snake.actionUp();
     this.addHistory('up');
-    this.upAndDown = true;
-    this.rightAndLeft = false;
+    this.active.upAndDown = true;
+    this.active.rightAndLeft = false;
   }
 
   public onDownButtonPressed() {
     this._snake.actionDown();
     this.addHistory('down');
-    this.upAndDown = true;
-    this.rightAndLeft = false;
+    this.active.upAndDown = true;
+    this.active.rightAndLeft = false;
   }
 
   public onLeftButtonPressed() {
     this._snake.actionLeft();
     this.addHistory('left');
-    this.upAndDown = false;
-    this.rightAndLeft = true;
+    this.active.upAndDown = false;
+    this.active.rightAndLeft = true;
   }
 
   public onRightButtonPressed() {
     this._snake.actionRight();
     this.addHistory('right');
-    this.upAndDown = false;
-    this.rightAndLeft = true;
+    this.active.upAndDown = false;
+    this.active.rightAndLeft = true;
   }
 
   public addLoginInfo(player: Login) {
@@ -221,16 +233,16 @@ export class GameComponent {
       this.message = "IF YOU ARE READY PRESS 'START'";
       return;
     }
-    if (this.status === 'play' || this.status === 'pause') {
+    if (this.active.status === 'play' || this.active.status === 'pause') {
       this.addScore();
       this.addHistory('exit');
     }
-    this.status = 'exit';
+    this.active.status = 'exit';
     this.onResetButtonPressed();
     this.page = 'intro';
   }
 
-  public displayScores() {
+  public onScoresButtonPressed() {
     if (this.page !== 'scores page') {
       this.page = 'scores page';
       this.message = "PRESS 'SCORES' OR 👇 TO RETURN";
@@ -240,7 +252,7 @@ export class GameComponent {
     }
   }
 
-  public displayHistory() {
+  public onHistoryButtonPressed() {
     if (this.page !== 'history page') {
       this.page = 'history page';
       this.message = "PRESS 'HISTORY' OR 👇 TO RETURN";
@@ -248,5 +260,9 @@ export class GameComponent {
       this.page = 'main page';
       this.message = "IF YOU ARE READY PRESS 'START'";
     }
+  }
+
+  public onAction(action: keyof GameActions) {
+    this[action]();
   }
 }
