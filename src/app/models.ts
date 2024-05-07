@@ -32,6 +32,8 @@ export interface ActiveButtons {
   rightAndLeft: boolean;
   reset: boolean;
   status: string;
+  scoresView: boolean;
+  historyView: boolean;
 }
 
 export interface GameActions {

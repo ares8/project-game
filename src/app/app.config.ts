@@ -9,9 +9,20 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
       { path: 'intro', component: IntroComponent },
-      { path: 'game', component: GameComponent },
-      { path: 'game/scores', component: ScoresComponent },
-      { path: 'game/history', component: HistoryComponent },
+      {
+        path: 'game',
+        component: GameComponent,
+        children: [
+          {
+            path: 'scores',
+            component: ScoresComponent,
+          },
+          {
+            path: 'history',
+            component: HistoryComponent,
+          },
+        ],
+      },
       { path: '**', redirectTo: 'intro' },
     ]),
   ],

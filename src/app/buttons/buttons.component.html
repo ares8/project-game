@@ -1,9 +1,9 @@
 <div class="place-A-B"></div>
-<button class="A" *ngIf="active?.startAndStop" [disabled]=""
+<button class="A" *ngIf="active?.startAndStop" [disabled]="active?.scoresView || active?.historyView"
 	(click)="addAction('onStartButtonPressed')"><span>START/<br />PAUSE</span></button>
 <button class="A" *ngIf="!active?.startAndStop" [disabled]="validation"
 	(click)="addAction('onStopButtonPressed')"><span>START/<br />PAUSE</span></button>
-<button class="B" [disabled]="active?.reset || block"
+<button class="B" [disabled]="active?.reset || active?.scoresView || active?.historyView || block"
 	(click)="addAction('onResetButtonPressed')"><span>RESET</span></button>
 
 <div class="outer-circle">

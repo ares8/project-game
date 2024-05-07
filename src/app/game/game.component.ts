@@ -15,6 +15,7 @@ import {
 } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -27,6 +28,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
     ScoresComponent,
     ButtonsComponent,
     GameInfoComponent,
+    RouterOutlet,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -35,7 +37,6 @@ export class GameComponent {
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
 
-  public page = 'intro';
   public scores: Array<Score> = [];
   public seconds = 0;
   public minutes = 0;
@@ -64,7 +65,11 @@ export class GameComponent {
     rightAndLeft: true,
     reset: true,
     status: 'ready',
+    scoresView: false,
+    historyView: false,
   };
+
+  public constructor(private _router: Router) {}
 
   public addStatus(status: string) {
     this.active.status = status;
@@ -231,15 +236,11 @@ export class GameComponent {
     this.active.rightAndLeft = true;
   }
 
-  public addLoginInfo(player: Login) {
-    this.page = 'main page';
-    this.name = player.name;
-    this.options.currentName = player.name;
-  }
-
   public onExitButtonPressed() {
-    if (this.page === 'scores page' || this.page === 'history page') {
-      this.page = 'main page';
+    if (this.active.scoresView || this.active.historyView) {
+      this.active.scoresView = false;
+      this.active.historyView = false;
+      this._router.navigate(['/game']);
       this.message = "IF YOU ARE READY PRESS 'START'";
       return;
     }
@@ -249,25 +250,31 @@ export class GameComponent {
     }
     this.addStatus('exit');
     this.onResetButtonPressed();
-    this.page = 'intro';
+    this._router.navigate(['/intro']);
   }
 
   public onScoresButtonPressed() {
-    if (this.page !== 'scores page') {
-      this.page = 'scores page';
+    if (!this.active.scoresView) {
+      this.active.scoresView = true;
+      this.active.historyView = false;
       this.message = "PRESS 'SCORES' OR 👇 TO RETURN";
+      this._router.navigate(['/game/scores']);
     } else {
-      this.page = 'main page';
+      this.active.scoresView = false;
+      this._router.navigate(['/game']);
       this.message = "IF YOU ARE READY PRESS 'START'";
     }
   }
 
   public onHistoryButtonPressed() {
-    if (this.page !== 'history page') {
-      this.page = 'history page';
+    if (!this.active.historyView) {
+      this.active.historyView = true;
+      this.active.scoresView = false;
       this.message = "PRESS 'HISTORY' OR 👇 TO RETURN";
+      this._router.navigate(['/game/history']);
     } else {
-      this.page = 'main page';
+      this.active.historyView = false;
+      this._router.navigate(['/game']);
       this.message = "IF YOU ARE READY PRESS 'START'";
     }
   }
