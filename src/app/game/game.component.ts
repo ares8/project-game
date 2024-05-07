@@ -16,6 +16,7 @@ import {
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { UserInfoService } from '../services/user-info.service';
 
 @Component({
   selector: 'app-game',
@@ -69,7 +70,17 @@ export class GameComponent {
     historyView: false,
   };
 
-  public constructor(private _router: Router) {}
+  public constructor(
+    private _router: Router,
+    private _userInfo: UserInfoService
+  ) {
+    if (!this._userInfo.isValid) {
+      alert('Verify your name and e-mail first!');
+      this._router.navigate(['/intro']);
+    }
+
+    this.name = this._userInfo.login.name;
+  }
 
   public addStatus(status: string) {
     this.active.status = status;
@@ -250,6 +261,7 @@ export class GameComponent {
     }
     this.addStatus('exit');
     this.onResetButtonPressed();
+    this._userInfo.reset();
     this._router.navigate(['/intro']);
   }
 
