@@ -1,55 +1,15 @@
 <div class="history-page">
-	<div class="navbar-statistics"> <span>GAME HISTORY&nbsp;</span>
-		<label>[only me<input type="checkbox" [(ngModel)]="currentPlayer"
-				(change)="currentPlayer ? name = options.currentName : name ='All'; reset()" />]</label>
+	<div class="navbar-statistics">
+		<span>GAME HISTORY&nbsp;</span>
+		<label>[only me<input type="checkbox" [(ngModel)]="toDisplay.currentPlayer" (change)="changeName()" />]
+		</label>
 		<span>&nbsp;- filter by:</span>
 	</div>
+	<app-history-options [options]="options" [(toDisplay)]="toDisplay" (action)="reset($event)"></app-history-options>
 
-	<div class="choise">
-		<select [disabled]="currentPlayer" [(ngModel)]="name" (change)="reset()">
-			<option>All</option>
-			<option *ngFor="let name of options.names">{{name}}</option>
-		</select>
-
-		<select [(ngModel)]="game" (change)="resetAction()">
-			<option>All</option>
-			<option *ngFor="let game of options.games[name]">{{game}}</option>
-		</select>
-
-		<select [(ngModel)]="sort">
-			<option>Desc</option>
-			<option>Asce</option>
-		</select>
-
-		<select [(ngModel)]="action">
-			<option>All</option>
-			<option *ngFor="let action of options.actions[name+game]">{{action}}</option>
-		</select>
-	</div>
-
-	<div class="tab">
-		<table>
-			<thead>
-				<tr>
-					<th>NAME</th>
-					<th>GAME</th>
-					<th>TIME</th>
-					<th>ACTION</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let player of players | filterAndSortHistory:name:game:action:sort; let first = first">
-					@if(name === 'All') {
-					<td>{{player.name}}</td>
-					}@else {
-					<td class="td-n" *ngIf="first" [attr.rowspan]="players.length">{{player.name}}</td>
-					}
-					<td class="td-k">{{player.game}}</td>
-					<td>{{player.time}}</td>
-					<td class="td-k">{{player.action}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
+	@if(players.length) {
+	<app-history-list [players]="players" [toDisplay]="toDisplay"></app-history-list>
+	} @else {
+	<div class="empty">No history to display</div>
+	}
 </div>

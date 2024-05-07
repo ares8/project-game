@@ -4,7 +4,7 @@ import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
 import { ScoresComponent } from '../scores/scores.component';
-import { ActiveButtons, GameActions, GameInfo, Options } from '../models';
+import { ActiveButtons, GameActions, GameInfo } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { Router, RouterOutlet } from '@angular/router';

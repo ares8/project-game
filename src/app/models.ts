@@ -54,3 +54,11 @@ export interface GameInfo {
   time: string;
   points: number;
 }
+
+export interface HistoryDisplay {
+  name: string;
+  game: string;
+  sort: string;
+  action: string;
+  currentPlayer: boolean;
+}

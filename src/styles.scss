@@ -98,11 +98,16 @@ ngx-snake {
 	background-color: #777;
 }
 
-.tab {
+.tab,
+.empty {
 	background-color: #8bac0f;
 	height: 272px;
 	overflow: auto;
 	overflow-x: auto;
+}
+
+.empty {
+	padding-left: 10px;
 }
 
 div table {

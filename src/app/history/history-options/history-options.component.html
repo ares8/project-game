@@ -1,0 +1,21 @@
+<div class="choise">
+	<select [disabled]="toDisplay.currentPlayer" [(ngModel)]="toDisplay.name" (change)="reset('all')">
+		<option>All</option>
+		<option *ngFor="let name of options.names">{{name}}</option>
+	</select>
+
+	<select [(ngModel)]="toDisplay.game" (change)="reset('action')">
+		<option>All</option>
+		<option *ngFor="let game of options.games[toDisplay.name]">{{game}}</option>
+	</select>
+
+	<select [(ngModel)]="toDisplay.sort">
+		<option>Desc</option>
+		<option>Asce</option>
+	</select>
+
+	<select [(ngModel)]="toDisplay.action">
+		<option>All</option>
+		<option *ngFor="let action of options.actions[toDisplay.name+toDisplay.game]">{{action}}</option>
+	</select>
+</div>
