@@ -4,19 +4,12 @@ import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
 import { ScoresComponent } from '../scores/scores.component';
-import {
-  ActiveButtons,
-  GameActions,
-  GameHistory,
-  GameInfo,
-  Login,
-  Options,
-  Score,
-} from '../models';
+import { ActiveButtons, GameActions, GameInfo, Options } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { UserInfoService } from '../services/user-info.service';
+import { StatisticsService } from '../services/statistics.service';
 
 @Component({
   selector: 'app-game',
@@ -38,22 +31,13 @@ export class GameComponent {
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
 
-  public scores: Array<Score> = [];
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
   public totalTimeInSeconds = 0;
-  public history: Array<GameHistory> = [];
   public interval!: ReturnType<typeof setInterval>;
   public name = '';
   public game = 1;
-  public options: Options = {
-    names: [],
-    games: {},
-    actions: {},
-    currentName: '',
-  };
-  public historyId = 0;
   public message = "IF YOU ARE READY PRESS 'START'";
   public gameInfo: GameInfo = {
     status: 'ready',
@@ -72,7 +56,8 @@ export class GameComponent {
 
   public constructor(
     private _router: Router,
-    private _userInfo: UserInfoService
+    private _userInfo: UserInfoService,
+    private _stats: StatisticsService
   ) {
     if (!this._userInfo.isValid) {
       alert('Verify your name and e-mail first!');
@@ -80,6 +65,7 @@ export class GameComponent {
     }
 
     this.name = this._userInfo.login.name;
+    this._stats.options.currentName = this.name;
   }
 
   public addStatus(status: string) {
@@ -109,7 +95,7 @@ export class GameComponent {
   }
 
   public addScore() {
-    this.scores.push({
+    this._stats.scores.push({
       name: this.name,
       points: this.gameInfo.points,
       time: this.gameInfo.time,
@@ -132,28 +118,27 @@ export class GameComponent {
   }
 
   public addHistory(action: string) {
-    this.history.push({
+    this._stats.history.push({
       name: this.name,
       game: this.game,
       action: action,
       time: this.gameInfo.time,
-      id: this.historyId,
+      id: this._stats.history.length,
     });
-    this.historyId++;
 
     if (action === 'start') {
-      if (!this.options.names.includes(this.name)) {
-        this.options.names.push(this.name);
+      if (!this._stats.options.names.includes(this.name)) {
+        this._stats.options.names.push(this.name);
       }
 
-      this.addOption(this.options.games, this.name, this.game);
-      this.addOption(this.options.games, 'All', this.game);
+      this.addOption(this._stats.options.games, this.name, this.game);
+      this.addOption(this._stats.options.games, 'All', this.game);
     }
 
-    this.addOption(this.options.actions, this.name + this.game, action);
-    this.addOption(this.options.actions, 'All' + this.game, action);
-    this.addOption(this.options.actions, this.name + 'All', action);
-    this.addOption(this.options.actions, 'AllAll', action);
+    this.addOption(this._stats.options.actions, this.name + this.game, action);
+    this.addOption(this._stats.options.actions, 'All' + this.game, action);
+    this.addOption(this._stats.options.actions, this.name + 'All', action);
+    this.addOption(this._stats.options.actions, 'AllAll', action);
   }
 
   public onGrow() {
@@ -174,9 +159,9 @@ export class GameComponent {
     if (this.active.status !== 'pause') {
       this.onResetButtonPressed();
       this.game = 1;
-      if (this.options.games?.[this.name]) {
-        const lastGameIndex = this.options.games[this.name].length - 1;
-        this.game = this.options.games[this.name][lastGameIndex] + 1;
+      if (this._stats.options.games?.[this.name]) {
+        const lastGameIndex = this._stats.options.games[this.name].length - 1;
+        this.game = this._stats.options.games[this.name][lastGameIndex] + 1;
       }
     }
 

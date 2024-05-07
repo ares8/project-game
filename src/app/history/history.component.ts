@@ -3,6 +3,7 @@ import { GameHistory, Options } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterAndSortHistoryPipe } from '../pipes/filter-and-sort-history.pipe';
+import { StatisticsService } from '../services/statistics.service';
 
 @Component({
   selector: 'app-history',
@@ -12,11 +13,13 @@ import { FilterAndSortHistoryPipe } from '../pipes/filter-and-sort-history.pipe'
   styleUrl: './history.component.scss',
 })
 export class HistoryComponent {
-  @Input()
   public players!: Array<GameHistory>;
-
-  @Input()
   public options!: Options;
+
+  constructor(private _stats: StatisticsService) {
+    this.players = this._stats.history;
+    this.options = this._stats.options;
+  }
 
   public name = 'All';
   public game = 'All';
