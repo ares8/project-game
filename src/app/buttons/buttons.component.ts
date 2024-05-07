@@ -10,6 +10,8 @@ import { ActiveButtons, GameActions } from '../models';
   styleUrl: './buttons.component.scss',
 })
 export class ButtonsComponent {
+  @Input() public validation!: boolean | null;
+  @Input() public block!: boolean | null;
   @Input() public active!: ActiveButtons | null;
 
   @Output() public action = new EventEmitter<keyof GameActions>();

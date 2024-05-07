@@ -1,32 +1,33 @@
 <div class="place-A-B"></div>
 <button class="A" *ngIf="active?.startAndStop" [disabled]=""
 	(click)="addAction('onStartButtonPressed')"><span>START/<br />PAUSE</span></button>
-<button class="A" *ngIf="!active?.startAndStop"
+<button class="A" *ngIf="!active?.startAndStop" [disabled]="validation"
 	(click)="addAction('onStopButtonPressed')"><span>START/<br />PAUSE</span></button>
-<button class="B" [disabled]="active?.reset" (click)="addAction('onResetButtonPressed')"><span>RESET</span></button>
+<button class="B" [disabled]="active?.reset || block"
+	(click)="addAction('onResetButtonPressed')"><span>RESET</span></button>
 
 <div class="outer-circle">
-	<button class="up" [disabled]="active?.startAndStop || active?.upAndDown"
+	<button class="up" [disabled]="active?.startAndStop || active?.upAndDown || block"
 		(click)="addAction('onUpButtonPressed')"></button>
-	<button class="down" [disabled]="active?.startAndStop || active?.upAndDown"
+	<button class="down" [disabled]="active?.startAndStop || active?.upAndDown || block"
 		(click)="addAction('onDownButtonPressed')"></button>
-	<button class="left" [disabled]="active?.startAndStop || active?.rightAndLeft"
+	<button class="left" [disabled]="active?.startAndStop || active?.rightAndLeft || block"
 		(click)="addAction('onLeftButtonPressed')"></button>
-	<button class="right" [disabled]="active?.startAndStop || active?.rightAndLeft"
+	<button class="right" [disabled]="active?.startAndStop || active?.rightAndLeft || block"
 		(click)="addAction('onRightButtonPressed')"></button>
 	<div class="middle"></div>
 	<div class="middle-circle"></div>
 </div>
 
 <div class="place-scores">
-	<button class="scores" [disabled]="active?.status==='play'"
+	<button class="scores" [disabled]="active?.status==='play' || block"
 		(click)="addAction('onScoresButtonPressed')"><span>SCORES</span></button>
 </div>
 
 <div class="place-history">
-	<button class="history" [disabled]="active?.status==='play'"
+	<button class="history" [disabled]="active?.status==='play' || block"
 		(click)="addAction('onHistoryButtonPressed')"><span>HISTORY</span></button>
 </div>
 
-<button class="exit-and-back" [disabled]="" (click)="addAction('onExitButtonPressed')"><span>EXIT /
+<button class="exit-and-back" [disabled]="block" (click)="addAction('onExitButtonPressed')"><span>EXIT /
 		BACK</span></button>
