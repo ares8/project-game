@@ -16,14 +16,11 @@
 	</div>
 
 	<div>
-		<p class="title-email">USER E-MAIL</p>
-		<input name="email" #emailModel="ngModel" required pattern="^\S+@\S+\.\S+$" type="email" ngModel />
-		<div class="help" *ngIf="emailModel.touched && emailModel.invalid">
-			<p *ngIf="emailModel.errors?.['required']">
-				[E-MAIL IS REQUIRED]
-			</p>
-			<p *ngIf="emailModel.errors?.['pattern']">
-				[INVALID EMAIL]
+		<p class="title-token">USER TOKEN</p>
+		<input name="token" #tokenModel="ngModel" required type="text" ngModel />
+		<div class="help" *ngIf="tokenModel.touched && tokenModel.invalid">
+			<p *ngIf="tokenModel.errors?.['required']">
+				[TOKEN IS REQUIRED]
 			</p>
 		</div>
 	</div>

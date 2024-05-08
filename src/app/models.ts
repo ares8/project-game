@@ -1,6 +1,6 @@
 export interface Login {
   name: string;
-  email: string;
+  token: string;
 }
 
 export interface GameHistory {
@@ -69,4 +69,8 @@ export interface ScoresDisplay {
   currentPlayer: boolean;
   currentName: string;
   allNames: Array<string>;
+}
+
+export interface UserToken {
+  success: boolean;
 }

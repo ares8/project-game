@@ -15,8 +15,15 @@ export class IntroComponent {
   constructor(private _router: Router, private _userInfo: UserInfoService) {}
 
   public addLoginInfo(data: Login) {
-    this._userInfo.verifyData();
     this._userInfo.login = data;
-    this._router.navigate(['/game']);
+
+    this._userInfo.checkToken(data.token).subscribe((data) => {
+      if (!data.success) {
+        alert('Token must have 4 digits!');
+      } else {
+        this._userInfo.verifyLogin();
+        this._router.navigate(['/game']);
+      }
+    });
   }
 }

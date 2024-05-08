@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Login } from '../models';
+import { Login, UserToken } from '../models';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -8,12 +9,28 @@ export class UserInfoService {
   private _dataVerified: boolean = false;
   private _login: Login = {
     name: '',
-    email: '',
+    token: '',
   };
+
+  constructor(private _http: HttpClient) {}
+
+  public checkToken(token: string) {
+    const URL = 'http://localhost:8080/check-token';
+
+    const headers = new HttpHeaders({
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+
+    const body = { 'auth-token': token };
+    const options = { headers };
+
+    return this._http.post<UserToken>(URL, body, options);
+  }
 
   public set login(data: Login) {
     this._login.name = data.name;
-    this._login.email = data.email;
+    this._login.token = data.token;
   }
 
   public get login() {
@@ -24,7 +41,7 @@ export class UserInfoService {
     return this._dataVerified;
   }
 
-  public verifyData(): void {
+  public verifyLogin(): void {
     this._dataVerified = true;
   }
 
