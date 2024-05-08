@@ -62,3 +62,9 @@ export interface HistoryDisplay {
   action: string;
   currentPlayer: boolean;
 }
+
+export interface ScoresDisplay {
+  name: string;
+  sort: string;
+  currentPlayer: boolean;
+}

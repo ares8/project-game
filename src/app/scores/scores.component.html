@@ -1,44 +1,16 @@
 <div class="scores-page">
-	<div class="navbar-statistics"> <span>HIGH SCORES&nbsp;</span>
-		<label>[only me <input type="checkbox" [(ngModel)]="currentPlayer"
-				(change)="currentPlayer ? name = options.currentName : name ='All'; reset()" />]</label>
+	<div class="navbar-statistics">
+		<span>HIGH SCORES&nbsp;</span>
+		<label>[only me <input type="checkbox" [(ngModel)]="toDisplay.currentPlayer" (change)="changeName()" />]
+		</label>
 		<span>&nbsp;- filter by:</span>
 	</div>
 
-	<div class="choise">
-		<label> Name
-			<select class="s1" [disabled]="currentPlayer" [(ngModel)]="name" (change)="reset()">
-				<option>All</option>
-				<option *ngFor="let name of options.names">{{name}}</option>
-			</select>
-		</label>
-		<label> Points
-			<select class="s2" [(ngModel)]="sort">
-				<option>Desc</option>
-				<option>Asce</option>
-			</select>
-		</label>
-	</div>
+	<app-scores-options [options]="options" [(toDisplay)]="toDisplay" (action)="reset()"></app-scores-options>
 
-	<div class="tab">
-		<table>
-			<thead>
-				<tr>
-					<th>NR</th>
-					<th>NAME</th>
-					<th>POINTS</th>
-					<th>TIME</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let player of players | filterAndSortScores:sort:name">
-					<td>{{player.position}}</td>
-					<td class="td-k">{{player.name}}</td>
-					<td>{{player.points}}</td>
-					<td class="td-k">{{player.time}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
+	@if(players.length){
+	<app-scores-list [players]="players" [toDisplay]="toDisplay"></app-scores-list>
+	}@else {
+	<div class="empty">No scores to display</div>
+	}
 </div>

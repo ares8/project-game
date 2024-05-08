@@ -1,0 +1,14 @@
+<div class="choise">
+	<label> Name
+		<select class="s1" [disabled]="toDisplay.currentPlayer" [(ngModel)]="toDisplay.name" (change)="reset()">
+			<option>All</option>
+			<option *ngFor="let name of options.names">{{name}}</option>
+		</select>
+	</label>
+	<label> Points
+		<select class="s2" [(ngModel)]="toDisplay.sort">
+			<option>Desc</option>
+			<option>Asce</option>
+		</select>
+	</label>
+</div>

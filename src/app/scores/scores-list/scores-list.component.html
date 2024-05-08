@@ -1,0 +1,20 @@
+<div class="tab">
+	<table>
+		<thead>
+			<tr>
+				<th>NR</th>
+				<th>NAME</th>
+				<th>POINTS</th>
+				<th>TIME</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let player of players | filterAndSortScores:toDisplay.sort:toDisplay.name">
+				<td>{{player.position}}</td>
+				<td class="td-k">{{player.name}}</td>
+				<td>{{player.points}}</td>
+				<td class="td-k">{{player.time}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
