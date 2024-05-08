@@ -5,16 +5,20 @@
 				<th>NR</th>
 				<th>NAME</th>
 				<th>POINTS</th>
-				<th>TIME</th>
 			</tr>
 		</thead>
 		<tbody>
+			@if(toDisplay.currentPlayer && !toDisplay.allNames.includes(toDisplay.currentName)) {
+			<tr>
+				<td colspan="3">No scores to display</td>
+			</tr>
+			} @else {
 			<tr *ngFor="let player of players | filterAndSortScores:toDisplay.sort:toDisplay.name">
 				<td>{{player.position}}</td>
 				<td class="td-k">{{player.name}}</td>
-				<td>{{player.points}}</td>
-				<td class="td-k">{{player.time}}</td>
+				<td>{{player.score}}</td>
 			</tr>
+			}
 		</tbody>
 	</table>
 </div>

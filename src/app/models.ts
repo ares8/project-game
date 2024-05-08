@@ -20,10 +20,8 @@ export interface Options {
 
 export interface Score {
   name: string;
-  points: number;
-  time: string;
-  totalTimeInSeconds: number;
-  position: number;
+  score: number;
+  position?: number;
 }
 
 export interface ActiveButtons {
@@ -61,10 +59,14 @@ export interface HistoryDisplay {
   sort: string;
   action: string;
   currentPlayer: boolean;
+  currentName: string;
+  allNames: Array<string>;
 }
 
 export interface ScoresDisplay {
   name: string;
   sort: string;
   currentPlayer: boolean;
+  currentName: string;
+  allNames: Array<string>;
 }

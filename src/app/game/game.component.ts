@@ -4,7 +4,7 @@ import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
 import { ScoresComponent } from '../scores/scores.component';
-import { ActiveButtons, GameActions, GameInfo } from '../models';
+import { ActiveButtons, GameActions, GameInfo, Score } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { Router, RouterOutlet } from '@angular/router';
@@ -34,7 +34,6 @@ export class GameComponent {
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
-  public totalTimeInSeconds = 0;
   public interval!: ReturnType<typeof setInterval>;
   public name = '';
   public game = 1;
@@ -66,6 +65,18 @@ export class GameComponent {
 
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
+
+    this._stats.load().subscribe((data) => {
+      this.getScores(data);
+    });
+  }
+
+  public getScores(data: Array<Score>) {
+    data.sort((a, b) => b.score - a.score);
+    this._stats.scores = data.slice(0, 10);
+    this._stats.scores.forEach((player, i) => {
+      player.position = i + 1;
+    });
   }
 
   public addStatus(status: string) {
@@ -75,7 +86,6 @@ export class GameComponent {
 
   public timeRecording() {
     this.seconds += 0.1;
-    this.totalTimeInSeconds += 0.1;
     if (this.seconds > 59.99) {
       this.minutes++;
       this.seconds = 0;
@@ -97,9 +107,7 @@ export class GameComponent {
   public addScore() {
     this._stats.scores.push({
       name: this.name,
-      points: this.gameInfo.points,
-      time: this.gameInfo.time,
-      totalTimeInSeconds: this.totalTimeInSeconds,
+      score: this.gameInfo.points,
       position: 0,
     });
   }
@@ -195,7 +203,6 @@ export class GameComponent {
     this.seconds = 0;
     this.minutes = 0;
     this.hours = 0;
-    this.totalTimeInSeconds = 0;
     this.gameInfo.time = '00:00:00';
     this.active.startAndStop = true;
     this.active.rightAndLeft = true;

@@ -2,7 +2,7 @@
 	<label> Name
 		<select class="s1" [disabled]="toDisplay.currentPlayer" [(ngModel)]="toDisplay.name" (change)="reset()">
 			<option>All</option>
-			<option *ngFor="let name of options.names">{{name}}</option>
+			<option *ngFor="let name of toDisplay.allNames">{{name}}</option>
 		</select>
 	</label>
 	<label> Points

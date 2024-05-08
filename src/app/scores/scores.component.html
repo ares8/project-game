@@ -6,7 +6,7 @@
 		<span>&nbsp;- filter by:</span>
 	</div>
 
-	<app-scores-options [options]="options" [(toDisplay)]="toDisplay" (action)="reset()"></app-scores-options>
+	<app-scores-options [(toDisplay)]="toDisplay" (action)="reset()"></app-scores-options>
 
 	@if(players.length){
 	<app-scores-list [players]="players" [toDisplay]="toDisplay"></app-scores-list>

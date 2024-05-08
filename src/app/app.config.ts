@@ -4,6 +4,7 @@ import { IntroComponent } from './intro/intro.component';
 import { GameComponent } from './game/game.component';
 import { ScoresComponent } from './scores/scores.component';
 import { HistoryComponent } from './history/history.component';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
       },
       { path: '**', redirectTo: 'intro' },
     ]),
+    provideHttpClient(),
   ],
 };

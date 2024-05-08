@@ -9,6 +9,11 @@
 			</tr>
 		</thead>
 		<tbody>
+			@if(toDisplay.currentPlayer && !toDisplay.allNames.includes(toDisplay.currentName)) {
+			<tr>
+				<td colspan="4">No history to display</td>
+			</tr>
+			} @else {
 			<tr
 				*ngFor="let player of players | filterAndSortHistory:toDisplay.name:toDisplay.game:toDisplay.action:toDisplay.sort; let first = first">
 				@if(toDisplay.name === 'All') {
@@ -20,6 +25,7 @@
 				<td>{{player.time}}</td>
 				<td class="td-k">{{player.action}}</td>
 			</tr>
+			}
 		</tbody>
 	</table>
 </div>

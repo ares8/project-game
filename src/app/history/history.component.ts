@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { HistoryDisplay, GameHistory, Options } from '../models';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FilterAndSortHistoryPipe } from '../pipes/filter-and-sort-history.pipe';
 import { StatisticsService } from '../services/statistics.service';
 import { HistoryOptionsComponent } from './history-options/history-options.component';
 import { HistoryListComponent } from './history-list/history-list.component';
@@ -24,11 +22,15 @@ export class HistoryComponent {
     sort: 'Desc',
     action: 'All',
     currentPlayer: false,
+    currentName: '',
+    allNames: [],
   };
 
   constructor(private _stats: StatisticsService) {
     this.players = this._stats.history;
     this.options = this._stats.options;
+    this.toDisplay.currentName = this._stats.options.currentName;
+    this.toDisplay.allNames = this._stats.options.names;
   }
 
   public reset(value: string) {
@@ -42,7 +44,7 @@ export class HistoryComponent {
 
   public changeName() {
     this.toDisplay.currentPlayer
-      ? (this.toDisplay.name = this.options.currentName)
+      ? (this.toDisplay.name = this.toDisplay.currentName)
       : (this.toDisplay.name = 'All');
     this.reset('all');
   }
