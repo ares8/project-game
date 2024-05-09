@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { HistoryDisplay, GameHistory, Options } from '../models';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FilterAndSortHistoryPipe } from '../pipes/filter-and-sort-history.pipe';
 import { StatisticsService } from '../services/statistics.service';
 import { HistoryOptionsComponent } from './history-options/history-options.component';
 import { HistoryListComponent } from './history-list/history-list.component';

@@ -69,6 +69,12 @@ export class GameComponent {
     this._stats.load().subscribe((data) => {
       this.getScores(data);
     });
+
+    setInterval(() => {
+      this._stats.load().subscribe((data) => {
+        this.getScores(data);
+      });
+    }, 30000);
   }
 
   public getScores(data: Array<Score>) {
@@ -105,11 +111,9 @@ export class GameComponent {
   }
 
   public addScore() {
-    this._stats.scores.push({
-      name: this.name,
-      score: this.gameInfo.points,
-      position: 0,
-    });
+    if (this.gameInfo.points) {
+      this._stats.sendScore(this.name, this.gameInfo.points).subscribe();
+    }
   }
 
   public addOption(
