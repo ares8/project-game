@@ -65,24 +65,6 @@ export class GameComponent {
 
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
-
-    this._stats.load().subscribe((data) => {
-      this.getScores(data);
-    });
-
-    setInterval(() => {
-      this._stats.load().subscribe((data) => {
-        this.getScores(data);
-      });
-    }, 30000);
-  }
-
-  public getScores(data: Array<Score>) {
-    data.sort((a, b) => b.score - a.score);
-    this._stats.scores = data.slice(0, 10);
-    this._stats.scores.forEach((player, i) => {
-      player.position = i + 1;
-    });
   }
 
   public addStatus(status: string) {
@@ -112,7 +94,9 @@ export class GameComponent {
 
   public addScore() {
     if (this.gameInfo.points) {
-      this._stats.sendScore(this.name, this.gameInfo.points).subscribe();
+      this._stats
+        .sendScore(this.name, this.gameInfo.points, this._userInfo.login.token)
+        .subscribe();
     }
   }
 

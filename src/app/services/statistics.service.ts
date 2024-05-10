@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { GameHistory, Options, Score } from '../models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInfoService } from './user-info.service';
+import { map, tap, timer } from 'rxjs';
+
+const loadUrl = 'http://localhost:8080/scores/snake';
+const sendUrl = 'http://localhost:8080/scores';
 
 @Injectable({
   providedIn: 'root',
@@ -15,26 +18,43 @@ export class StatisticsService {
     actions: {},
     currentName: '',
   };
+  public namesInScores: Array<string> = [];
 
-  constructor(private _http: HttpClient, private _userInfo: UserInfoService) {}
+  constructor(private _http: HttpClient) {}
 
-  public load() {
-    const URL = 'http://localhost:8080/scores/snake';
+  private _loadHeaders = new HttpHeaders({
+    accept: 'application/json',
+  });
 
-    const headers = new HttpHeaders({
-      accept: 'application/json',
-    });
+  public scores$ = this._http
+    .get<Array<Score>>(loadUrl, {
+      headers: this._loadHeaders,
+    })
+    .pipe(
+      tap(() => {
+        this.namesInScores = [];
+      }),
+      map((data) =>
+        data
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10)
+          .map((player, i) => {
+            !this.namesInScores.includes(player.name) &&
+              this.namesInScores.push(player.name);
 
-    return this._http.get<Array<Score>>(URL, { headers });
-  }
+            player.position = i + 1;
+            return player;
+          })
+      )
+    );
 
-  public sendScore(name: string, score: number) {
-    const URL = 'http://localhost:8080/scores';
+  public time$ = timer(0, 30000);
 
+  public sendScore(name: string, score: number, token: string) {
     const headers = new HttpHeaders({
       accept: 'application/json',
       'Content-Type': 'application/json',
-      'auth-token': this._userInfo.login.token,
+      'auth-token': token,
     });
 
     const body = {
@@ -42,9 +62,8 @@ export class StatisticsService {
       game: 'snake',
       score: score,
     };
-
     const options = { headers };
 
-    return this._http.post<Array<Score>>(URL, body, options);
+    return this._http.post<Array<Score>>(sendUrl, body, options);
   }
 }
