@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FilterAndSortScoresPipe } from '../pipes/filter-and-sort-scores.pipe';
-import { Options, Score, ScoresDisplay } from '../models';
+import { Score, ScoresDisplay } from '../models';
 import { StatisticsService } from '../services/statistics.service';
 import { ScoresOptionsComponent } from './scores-options/scores-options.component';
 import { ScoresListComponent } from './scores-list/scores-list.component';
@@ -31,13 +30,14 @@ export class ScoresComponent {
   };
 
   public constructor(private _stats: StatisticsService) {
+    this.toDisplay.allNames = this._stats.namesInScores;
     this.toDisplay.currentName = this._stats.options.currentName;
-
     this.players = this._stats.scores;
-    this.players.forEach((player) => {
-      !this.toDisplay.allNames.includes(player.name) &&
-        this.toDisplay.allNames.push(player.name);
-    });
+  }
+
+  public reload() {
+    this.players = this._stats.scores;
+    this.toDisplay.allNames = this._stats.namesInScores;
   }
 
   public reset() {

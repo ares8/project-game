@@ -31,6 +31,9 @@ export class GameComponent {
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
 
+  @ViewChild(RouterOutlet)
+  private _scoresComponent!: RouterOutlet;
+
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
@@ -65,6 +68,15 @@ export class GameComponent {
 
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
+  }
+
+  public refreshScores() {
+    if (this._scoresComponent?.isActivated) {
+      const scoresComponent = this._scoresComponent.component;
+      if (scoresComponent instanceof ScoresComponent) {
+        scoresComponent.reload();
+      }
+    }
   }
 
   public addStatus(status: string) {
