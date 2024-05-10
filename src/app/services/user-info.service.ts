@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Login, UserToken } from '../models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const url = 'http://localhost:8080/check-token';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,20 +14,19 @@ export class UserInfoService {
     token: '',
   };
 
+  private _headers = new HttpHeaders({
+    accept: 'application/json',
+    'Content-Type': 'application/json',
+  });
+
   constructor(private _http: HttpClient) {}
 
   public checkToken(token: string) {
-    const URL = 'http://localhost:8080/check-token';
-
-    const headers = new HttpHeaders({
-      accept: 'application/json',
-      'Content-Type': 'application/json',
-    });
-
     const body = { 'auth-token': token };
-    const options = { headers };
 
-    return this._http.post<UserToken>(URL, body, options);
+    return this._http.post<UserToken>(url, body, {
+      headers: this._headers,
+    });
   }
 
   public set login(data: Login) {

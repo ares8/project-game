@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
@@ -10,6 +10,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { UserInfoService } from '../services/user-info.service';
 import { StatisticsService } from '../services/statistics.service';
+import { Subscription, concatMap, filter } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -27,13 +28,15 @@ import { StatisticsService } from '../services/statistics.service';
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
-export class GameComponent {
+export class GameComponent implements OnDestroy {
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
 
   @ViewChild(RouterOutlet)
   private _scoresComponent!: RouterOutlet;
 
+  private _sub$!: Subscription;
+  public refreshFlag = true;
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
@@ -68,6 +71,30 @@ export class GameComponent {
 
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
+
+    this._sub$ = this._stats.time$
+      .pipe(
+        filter(() => this.refreshFlag),
+        concatMap(() => {
+          return this._stats.scores$;
+        }),
+        filter((data) => {
+          if (Array.isArray(data) && data.length > 0) {
+            return true;
+          } else {
+            this._stats.scores.length && (this._stats.scores.length = 0);
+            return false;
+          }
+        })
+      )
+      .subscribe((data) => {
+        this._stats.scores = data;
+        this.refreshScores();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._sub$.unsubscribe();
   }
 
   public refreshScores() {
