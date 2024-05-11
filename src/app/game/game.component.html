@@ -1,7 +1,7 @@
 <div>
 	<div>
 		<div class="top-navbar">
-			<p>🐍HELLO {{name}}</p>
+			<p>HELLO {{name}}</p>
 		</div>
 		<ngx-snake class="black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
 		<app-game-info [info]="gameInfo"></app-game-info>
@@ -9,6 +9,10 @@
 
 	<div class="bottom-navbar">
 		<p>{{message}}</p>
+	</div>
+
+	<div class="refresh">↻SCORES
+		<input type="checkbox" [(ngModel)]="refreshFlag" (change)="refreshScores()" />
 	</div>
 </div>
 

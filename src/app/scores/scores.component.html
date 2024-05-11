@@ -1,9 +1,9 @@
 <div class="scores-page">
 	<div class="navbar-statistics">
 		<span>HIGH SCORES&nbsp;</span>
-		<label>[only me <input type="checkbox" [(ngModel)]="toDisplay.currentPlayer" (change)="changeName()" />]
+		<label>[only me
+			<input type="checkbox" [(ngModel)]="toDisplay.currentPlayer" (change)="changeName()" />]
 		</label>
-		<span>&nbsp;- filter by:</span>
 	</div>
 
 	<app-scores-options [(toDisplay)]="toDisplay" (action)="reset()"></app-scores-options>

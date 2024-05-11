@@ -11,6 +11,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { UserInfoService } from '../services/user-info.service';
 import { StatisticsService } from '../services/statistics.service';
 import { Subscription, concatMap, filter } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game',
@@ -24,6 +25,7 @@ import { Subscription, concatMap, filter } from 'rxjs';
     ButtonsComponent,
     GameInfoComponent,
     RouterOutlet,
+    FormsModule,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -76,6 +78,7 @@ export class GameComponent implements OnDestroy {
       .pipe(
         filter(() => this.refreshFlag),
         concatMap(() => {
+          console.log('new s');
           return this._stats.scores$;
         }),
         filter((data) => {

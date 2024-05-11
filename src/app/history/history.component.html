@@ -1,10 +1,11 @@
 <div class="history-page">
 	<div class="navbar-statistics">
 		<span>GAME HISTORY&nbsp;</span>
-		<label>[only me<input type="checkbox" [(ngModel)]="toDisplay.currentPlayer" (change)="changeName()" />]
+		<label>[only me
+			<input type="checkbox" [(ngModel)]="toDisplay.currentPlayer" (change)="changeName()" />]
 		</label>
-		<span>&nbsp;- filter by:</span>
 	</div>
+
 	<app-history-options [options]="options" [(toDisplay)]="toDisplay" (action)="reset($event)"></app-history-options>
 
 	@if(players.length) {

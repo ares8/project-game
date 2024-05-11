@@ -42,7 +42,8 @@ ngx-snake {
 }
 
 .top-navbar,
-.bottom-navbar {
+.bottom-navbar,
+.refresh {
 	position: absolute;
 	box-sizing: border-box;
 	font-family: 'VT323', system-ui, arial;
@@ -56,6 +57,19 @@ ngx-snake {
 	background-color: #555;
 	color: #a3ca11;
 	border: 3px solid #333;
+}
+
+.top-navbar {
+	width: 340px;
+}
+
+.refresh {
+	background-color: #546909;
+	color: #9dc311;
+	left: 362px;
+	top: 20px;
+	width: 107px;
+	z-index: 1;
 }
 
 .bottom-navbar {
@@ -84,6 +98,7 @@ ngx-snake {
 	background-color: #555;
 	color: #9dc311;
 	height: 37px;
+	width: 330px;
 	box-sizing: border-box;
 	border-bottom: 3px solid #333;
 	font-size: 25px;
