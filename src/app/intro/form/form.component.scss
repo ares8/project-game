@@ -13,7 +13,8 @@ form {
 	margin: $width auto;
 }
 
-input {
+input,
+select {
 	@include step(6px, black);
 	background-color: #8bac0f;
 	border: none;
@@ -22,6 +23,16 @@ input {
 	font-size: 23px;
 	width: 320px;
 	margin-top: 0;
+}
+
+select {
+	padding: 0px;
+	width: 150px;
+	height: 33px;
+}
+
+.token {
+	width: 150px;
 }
 
 input {
@@ -43,22 +54,23 @@ input:focus {
 p {
 	padding: 0px;
 	margin: 0px;
-	font-size: 26px;
 }
 
 .help p {
-	font-size: 22px;
+	font-size: 21px;
 }
 
 .title-name,
-.title-token {
-	margin-bottom: 4px;
+.title-token,
+.title-colors {
+	margin-bottom: 0px;
 	font-size: 28px;
 	font-weight: bold;
 	background-color: #444;
 	width: 105px;
 	color: #85a50e;
 	padding: 3px;
+	padding-bottom: 7px;
 	padding-left: 10px;
 }
 
@@ -66,9 +78,20 @@ p {
 	width: 118px;
 }
 
-form div:nth-child(2) {
+.title-colors {
+	width: 73px;
+}
+
+.down {
 	position: absolute;
 	top: 230px;
+	display: flex;
+	flex-direction: row;
+}
+
+.down div:nth-child(2) {
+	position: absolute;
+	left: 180px;
 }
 
 app-buttons {

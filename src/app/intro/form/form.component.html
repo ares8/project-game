@@ -1,4 +1,4 @@
-<form #form="ngForm" autocomplete="off" (submit)="submitLoginInfo(form.form.value)">
+<form #snakeForm="ngForm" autocomplete="off" (submit)="submitLoginInfo(snakeForm.form.value)">
 	<div>
 		<p class="title-name">USER NAME</p>
 		<input name="name" #nameModel="ngModel" required minlength="3" maxlength="20" pattern="^\S+[\S\s]*\S+$" ngModel />
@@ -15,15 +15,24 @@
 		</div>
 	</div>
 
-	<div>
-		<p class="title-token">USER TOKEN</p>
-		<input name="token" #tokenModel="ngModel" required type="text" ngModel />
-		<div class="help" *ngIf="tokenModel.touched && tokenModel.invalid">
-			<p *ngIf="tokenModel.errors?.['required']">
-				[TOKEN IS REQUIRED]
-			</p>
+	<div class="down">
+		<div>
+			<p class="title-token">USER TOKEN</p>
+			<input class="token" name="token" #tokenModel="ngModel" required type="text" ngModel />
+			<div class="help" *ngIf="tokenModel.touched && tokenModel.invalid">
+				<p *ngIf="tokenModel.errors?.['required']">
+					[TOKEN IS REQUIRED]
+				</p>
+			</div>
+		</div>
+
+		<div>
+			<p class="title-colors">COLORS</p>
+			<select name="color" #colorModel="ngModel" required ngModel>
+				<option value="normal">normal</option>
+				<option value="high">high contrast</option>
+			</select>
 		</div>
 	</div>
-
-	<app-buttons [validation]="form.invalid" [block]="true"></app-buttons>
+	<app-buttons [validation]="snakeForm.invalid" [block]="true"></app-buttons>
 </form>
