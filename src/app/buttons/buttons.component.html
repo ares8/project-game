@@ -31,3 +31,6 @@
 
 <button class="exit-and-back" [disabled]="block" (click)="addAction('onExitButtonPressed')"><span>EXIT /
 		BACK</span></button>
+
+<button class="colors" [disabled]="active?.scoresView || active?.historyView || block"
+	(click)="addAction('onColorButtonPressed')"><span>COLORS</span></button>

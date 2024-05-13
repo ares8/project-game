@@ -10,10 +10,19 @@ div {
 	width: 144px;
 	right: 29px;
 	top: 60px;
-	background-color: #333;
 	border-left: 3px solid #333;
 	border-right: 3px solid #333;
+}
+
+.normal {
+	background-color: #333;
 	color: #9dc311;
+}
+
+.high {
+	background-color: #9dc311;
+	color: #333;
+	font-weight: bold;
 }
 
 p {

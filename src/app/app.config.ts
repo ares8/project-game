@@ -11,7 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter([
       { path: 'intro', component: IntroComponent },
       {
-        path: 'game',
+        path: 'game/:colors',
         component: GameComponent,
         children: [
           {

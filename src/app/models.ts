@@ -46,6 +46,7 @@ export interface GameActions {
   onScoresButtonPressed: () => void;
   onHistoryButtonPressed: () => void;
   onExitButtonPressed: () => void;
+  onColorButtonPressed: () => void;
 }
 
 export interface GameInfo {

@@ -1,6 +1,7 @@
 .A,
 .B,
-.exit-and-back {
+.exit-and-back,
+.colors {
 	position: absolute;
 	box-sizing: border-box;
 	background-color: #b32430;
@@ -34,12 +35,19 @@ button span {
 	rotate: -24deg;
 }
 
+.B span {
+	top: 51px;
+	left: 18px;
+	rotate: -24deg;
+}
+
 .A:hover,
 .B:hover,
 .outer-circle button:hover,
 .scores:hover,
 .history:hover,
-.exit-and-back:hover {
+.exit-and-back:hover,
+.colors:hover {
 	cursor: pointer;
 }
 
@@ -50,24 +58,18 @@ button span {
 	background: linear-gradient(to top, #f4f3ee 25%, #c5c3c6 100%);
 	rotate: -24deg;
 	left: 284px;
-	top: 504px;
+	top: 534px;
 	border-radius: 50px;
 }
 
 .A {
 	left: 299px;
-	top: 534px;
+	top: 564px;
 }
 
 .B {
 	left: 389px;
-	top: 494px;
-}
-
-.B span {
-	top: 51px;
-	left: 18px;
-	rotate: -24deg;
+	top: 524px;
 }
 
 .outer-circle {
@@ -156,12 +158,12 @@ button span {
 
 .place-scores {
 	left: 124px;
-	top: 674px;
+	top: 684px;
 }
 
 .place-history {
 	left: 232px;
-	top: 674px;
+	top: 684px;
 }
 
 .scores,
@@ -190,21 +192,32 @@ button span {
 	right: 4px;
 }
 
-.exit-and-back {
+.exit-and-back,
+.colors {
 	box-shadow: 0 4px 7px #111, inset 0px 1px 4px #b3a4a4;
 	height: 35px;
 	width: 35px;
 	left: 274px;
-	top: 444px;
+	top: 464px;
 }
 
-.exit-and-back:active {
+.colors {
+	left: 340px;
+	top: 434px;
+}
+
+.exit-and-back:active,
+.colors:active {
 	box-shadow: 0 1px 2px #111, inset 0px 1px 1px #b3a4a4;
 }
 
 .exit-and-back span {
-	width: 103px;
+	rotate: -24deg;
+	top: 40px;
+}
+
+.colors span {
 	rotate: -24deg;
 	top: 32px;
-	right: 27px;
+	right: 10px;
 }

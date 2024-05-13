@@ -281,7 +281,7 @@ export class GameComponent implements OnDestroy {
     if (this.active.scoresView || this.active.historyView) {
       this.active.scoresView = false;
       this.active.historyView = false;
-      this._router.navigate(['/game']);
+      this._router.navigate(['/game', this.colors]);
       this.message = "IF YOU ARE READY PRESS 'START'";
       return;
     }
@@ -300,10 +300,10 @@ export class GameComponent implements OnDestroy {
       this.active.scoresView = true;
       this.active.historyView = false;
       this.message = "PRESS 'SCORES' OR 👇 TO RETURN";
-      this._router.navigate(['/game/scores']);
+      this._router.navigate(['/game', this.colors, 'scores']);
     } else {
       this.active.scoresView = false;
-      this._router.navigate(['/game']);
+      this._router.navigate(['/game', this.colors]);
       this.message = "IF YOU ARE READY PRESS 'START'";
     }
   }
@@ -313,12 +313,22 @@ export class GameComponent implements OnDestroy {
       this.active.historyView = true;
       this.active.scoresView = false;
       this.message = "PRESS 'HISTORY' OR 👇 TO RETURN";
-      this._router.navigate(['/game/history']);
+      this._router.navigate(['/game', this.colors, 'history']);
     } else {
       this.active.historyView = false;
-      this._router.navigate(['/game']);
+      this._router.navigate(['/game', this.colors]);
       this.message = "IF YOU ARE READY PRESS 'START'";
     }
+  }
+
+  public onColorButtonPressed() {
+    let currentColors = '';
+
+    this.colors === 'normal'
+      ? (currentColors = 'high')
+      : (currentColors = 'normal');
+
+    this._router.navigate(['/game', currentColors]);
   }
 
   public onAction(action: keyof GameActions) {
