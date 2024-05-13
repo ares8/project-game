@@ -69,11 +69,6 @@ export class GameComponent implements OnDestroy {
     private _userInfo: UserInfoService,
     private _stats: StatisticsService
   ) {
-    if (!this._userInfo.isValid) {
-      alert('Verify your name and e-mail first!');
-      this._router.navigate(['/intro']);
-    }
-
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
 
@@ -291,7 +286,6 @@ export class GameComponent implements OnDestroy {
     }
     this.addStatus('exit');
     this.onResetButtonPressed();
-    this._userInfo.reset();
     this._router.navigate(['/intro']);
   }
 

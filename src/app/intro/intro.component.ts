@@ -12,14 +12,15 @@ import { Login } from '../models';
   styleUrl: './intro.component.scss',
 })
 export class IntroComponent {
-  constructor(private _router: Router, private _userInfo: UserInfoService) {}
+  constructor(private _router: Router, private _userInfo: UserInfoService) {
+    this._userInfo.reset();
+  }
 
   public addLoginInfo(userData: Login) {
     this._userInfo.checkToken(userData.token).subscribe((data) => {
       if (!data.success) {
         alert('Token must have 4 digits!');
       } else {
-        this._userInfo.verifyLogin();
         this._userInfo.login = userData;
 
         const colors = userData.colors;

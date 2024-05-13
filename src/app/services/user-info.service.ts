@@ -8,8 +8,6 @@ const url = 'http://localhost:8080/check-token';
   providedIn: 'root',
 })
 export class UserInfoService {
-  private _dataVerified: boolean = false;
-
   private _headers = new HttpHeaders({
     accept: 'application/json',
     'Content-Type': 'application/json',
@@ -33,15 +31,7 @@ export class UserInfoService {
     return JSON.parse(localStorage.getItem('user')!);
   }
 
-  public get isValid() {
-    return this._dataVerified;
-  }
-
-  public verifyLogin(): void {
-    this._dataVerified = true;
-  }
-
-  public reset(): void {
-    this._dataVerified = false;
+  public reset() {
+    localStorage.removeItem('user');
   }
 }

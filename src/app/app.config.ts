@@ -5,6 +5,7 @@ import { GameComponent } from './game/game.component';
 import { ScoresComponent } from './scores/scores.component';
 import { HistoryComponent } from './history/history.component';
 import { provideHttpClient } from '@angular/common/http';
+import { loginVerificationGuard } from './login-verification.guard';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,14 +14,17 @@ export const appConfig: ApplicationConfig = {
       {
         path: 'game/:colors',
         component: GameComponent,
+        canActivate: [loginVerificationGuard],
         children: [
           {
             path: 'scores',
             component: ScoresComponent,
+            canActivate: [loginVerificationGuard],
           },
           {
             path: 'history',
             component: HistoryComponent,
+            canActivate: [loginVerificationGuard],
           },
         ],
       },
