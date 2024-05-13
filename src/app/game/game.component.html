@@ -3,7 +3,7 @@
 		<div class="top-navbar">
 			<p>HELLO {{name}}</p>
 		</div>
-		<ngx-snake class="black-and-white" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
+		<ngx-snake [class]="colors" (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
 		<app-game-info [info]="gameInfo"></app-game-info>
 	</div>
 

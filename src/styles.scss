@@ -7,11 +7,12 @@ ngx-snake {
 	position: absolute;
 	left: 25px;
 	top: 60px;
-	background: #91b40f;
 	box-sizing: border-box;
 	border-left: 3px solid #333;
 
-	&.black-and-white {
+	&.normal {
+		background: #91b40f;
+
 		ngx-snake-tile {
 			background: #ffffff00;
 			border: none;
@@ -39,6 +40,38 @@ ngx-snake {
 			}
 		}
 	}
+
+	&.high {
+		background: #222;
+
+		ngx-snake-tile {
+			background: #ffffff00;
+			border: none;
+
+			&.free {
+				div {
+					background: #ffffff00;
+
+				}
+			}
+
+			&.food {
+				div {
+					background: #91b40f;
+					transform: rotate(45deg);
+				}
+			}
+
+			&.head,
+			&.tail,
+			&.body {
+				div {
+					background: #91b40f;
+				}
+			}
+		}
+	}
+
 }
 
 .top-navbar,

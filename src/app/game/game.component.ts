@@ -7,7 +7,7 @@ import { ScoresComponent } from '../scores/scores.component';
 import { ActiveButtons, GameActions, GameInfo, Score } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { UserInfoService } from '../services/user-info.service';
 import { StatisticsService } from '../services/statistics.service';
 import { Subscription, concatMap, filter } from 'rxjs';
@@ -39,6 +39,7 @@ export class GameComponent implements OnDestroy {
 
   private _sub$!: Subscription;
   public refreshFlag = true;
+  public colors = '';
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
@@ -50,6 +51,7 @@ export class GameComponent implements OnDestroy {
     status: 'ready',
     time: '00:00:00',
     points: 0,
+    colors: '',
   };
   public active: ActiveButtons = {
     startAndStop: true,
@@ -63,6 +65,7 @@ export class GameComponent implements OnDestroy {
 
   public constructor(
     private _router: Router,
+    private _route: ActivatedRoute,
     private _userInfo: UserInfoService,
     private _stats: StatisticsService
   ) {
@@ -73,6 +76,11 @@ export class GameComponent implements OnDestroy {
 
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
+
+    this._route.params.subscribe((params) => {
+      this.colors = params['colors'];
+      this.gameInfo.colors = this.colors;
+    });
 
     this._sub$ = this._stats.time$
       .pipe(

@@ -9,10 +9,6 @@ const url = 'http://localhost:8080/check-token';
 })
 export class UserInfoService {
   private _dataVerified: boolean = false;
-  private _login: Login = {
-    name: '',
-    token: '',
-  };
 
   private _headers = new HttpHeaders({
     accept: 'application/json',
@@ -30,12 +26,11 @@ export class UserInfoService {
   }
 
   public set login(data: Login) {
-    this._login.name = data.name;
-    this._login.token = data.token;
+    localStorage.setItem('user', JSON.stringify(data));
   }
 
   public get login() {
-    return this._login;
+    return JSON.parse(localStorage.getItem('user')!);
   }
 
   public get isValid() {

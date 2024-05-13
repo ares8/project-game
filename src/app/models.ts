@@ -1,6 +1,7 @@
 export interface Login {
   name: string;
   token: string;
+  colors: string;
 }
 
 export interface GameHistory {
@@ -51,6 +52,7 @@ export interface GameInfo {
   status: string;
   time: string;
   points: number;
+  colors: string;
 }
 
 export interface HistoryDisplay {
