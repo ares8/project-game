@@ -69,6 +69,8 @@ export class GameComponent implements OnDestroy {
     private _userInfo: UserInfoService,
     private _stats: StatisticsService
   ) {
+    this._stats.readHistoryData();
+
     this.name = this._userInfo.login.name;
     this._stats.options.currentName = this.name;
 
@@ -81,7 +83,6 @@ export class GameComponent implements OnDestroy {
       .pipe(
         filter(() => this.refreshFlag),
         concatMap(() => {
-          console.log('new s');
           return this._stats.scores$;
         }),
         filter((data) => {
@@ -180,6 +181,9 @@ export class GameComponent implements OnDestroy {
     this.addOption(this._stats.options.actions, 'All' + this.game, action);
     this.addOption(this._stats.options.actions, this.name + 'All', action);
     this.addOption(this._stats.options.actions, 'AllAll', action);
+
+    this._stats.saveHistoryData('history', this._stats.history);
+    this._stats.saveHistoryData('options', this._stats.options);
   }
 
   public onGrow() {

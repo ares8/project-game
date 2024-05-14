@@ -66,4 +66,17 @@ export class StatisticsService {
 
     return this._http.post<Array<Score>>(sendUrl, body, options);
   }
+
+  public saveHistoryData(name: string, data: Array<GameHistory> | Options) {
+    localStorage.setItem(name, JSON.stringify(data));
+  }
+
+  public readHistoryData() {
+    const toRead: Array<'history' | 'options'> = ['history', 'options'];
+
+    toRead.forEach((el) => {
+      let data = JSON.parse(localStorage.getItem(el)!);
+      data && (this[el] = data);
+    });
+  }
 }
