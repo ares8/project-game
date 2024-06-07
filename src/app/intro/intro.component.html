@@ -1,7 +1,7 @@
-<div>
+<div [class]="theme">
 	<div class="intro">
 		<p class="title">WELCOME TO SNAKE</p>
-		<app-form (loginInfo)="addLoginInfo($event)"></app-form>
+		<app-form (loginInfo)="addLoginInfo($event)" (currentColors)="changeColors($event)"></app-form>
 		<div class="bottom-navbar">INPUT NAME, TOKEN, COLORS AND PRESS 'START'</div>
 	</div>
 </div>

@@ -25,11 +25,11 @@
 </div>
 
 <div class="place-history">
-	<button class="history" [disabled]="active?.status==='play' || block"
+	<button class="history" [disabled]="active?.status==='play'|| block"
 		(click)="addAction('onHistoryButtonPressed')"><span>HISTORY</span></button>
 </div>
 
-<button class="exit-and-back" [disabled]="block" (click)="addAction('onExitButtonPressed')"><span>EXIT /
+<button class="exit-and-back" [disabled]="block" (click)="addAction('onExitButtonPressed')"><span>EXIT/<br />
 		BACK</span></button>
 
 <button class="colors" [disabled]="active?.scoresView || active?.historyView || block"

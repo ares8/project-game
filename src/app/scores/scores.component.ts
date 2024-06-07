@@ -30,9 +30,8 @@ export class ScoresComponent {
   };
 
   public constructor(private _stats: StatisticsService) {
-    this.toDisplay.allNames = this._stats.namesInScores;
     this.toDisplay.currentName = this._stats.options.currentName;
-    this.players = this._stats.scores;
+    this.reload();
   }
 
   public reload() {

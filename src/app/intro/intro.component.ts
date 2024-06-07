@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormComponent } from './form/form.component';
 import { Router } from '@angular/router';
 import { UserInfoService } from '../services/user-info.service';
-import { Login } from '../models';
+import { FormGroup } from '@angular/forms';
+import { StatisticsService } from '../services/statistics.service';
 
 @Component({
   selector: 'app-intro',
@@ -12,20 +13,21 @@ import { Login } from '../models';
   styleUrl: './intro.component.scss',
 })
 export class IntroComponent {
-  constructor(private _router: Router, private _userInfo: UserInfoService) {
-    this._userInfo.reset();
+  public theme = 'normal';
+
+  constructor(private _router: Router, private _userInfo: UserInfoService, private _stats: StatisticsService) { }
+
+  public addLoginInfo(data: FormGroup) {
+    const { token, name, colors } = data.value;
+
+    this._userInfo.login = { name, colors };
+    this._userInfo.token = token;
+    this._stats.createSendHeaders(token);
+
+    this._router.navigate(['/game', colors]);
   }
 
-  public addLoginInfo(userData: Login) {
-    this._userInfo.checkToken(userData.token).subscribe((data) => {
-      if (!data.success) {
-        alert('Token must have 4 digits!');
-      } else {
-        this._userInfo.login = userData;
-
-        const colors = userData.colors;
-        this._router.navigate(['/game', colors]);
-      }
-    });
+  public changeColors(colors: string) {
+    this.theme = colors;
   }
 }

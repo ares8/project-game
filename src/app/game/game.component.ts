@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
-import { FormComponent } from '../intro/form/form.component';
 import { HistoryComponent } from '../history/history.component';
 import { ScoresComponent } from '../scores/scores.component';
-import { ActiveButtons, GameActions, GameInfo, Score } from '../models';
+import { ActiveButtons, GameActions, GameInfo } from '../models';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -19,7 +18,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     NgxSnakeModule,
     CommonModule,
-    FormComponent,
     HistoryComponent,
     ScoresComponent,
     ButtonsComponent,
@@ -35,7 +33,7 @@ export class GameComponent implements OnDestroy {
   private _snake!: NgxSnakeComponent;
 
   @ViewChild(RouterOutlet)
-  private _scoresComponent!: RouterOutlet;
+  private _childComponent!: RouterOutlet;
 
   private _sub$!: Subscription;
   public refreshFlag = true;
@@ -50,7 +48,7 @@ export class GameComponent implements OnDestroy {
   public gameInfo: GameInfo = {
     status: 'ready',
     time: '00:00:00',
-    points: 0,
+    points: 1000,
     colors: '',
   };
   public active: ActiveButtons = {
@@ -77,21 +75,14 @@ export class GameComponent implements OnDestroy {
     this._route.params.subscribe((params) => {
       this.colors = params['colors'];
       this.gameInfo.colors = this.colors;
+      this._userInfo.login = { name: this.name, colors: this.colors };
     });
 
-    this._sub$ = this._stats.time$
+    this._sub$ = this._stats.timer$
       .pipe(
         filter(() => this.refreshFlag),
         concatMap(() => {
           return this._stats.scores$;
-        }),
-        filter((data) => {
-          if (Array.isArray(data) && data.length > 0) {
-            return true;
-          } else {
-            this._stats.scores.length && (this._stats.scores.length = 0);
-            return false;
-          }
         })
       )
       .subscribe((data) => {
@@ -100,15 +91,15 @@ export class GameComponent implements OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this._sub$.unsubscribe();
   }
 
   public refreshScores() {
-    if (this._scoresComponent?.isActivated) {
-      const scoresComponent = this._scoresComponent.component;
-      if (scoresComponent instanceof ScoresComponent) {
-        scoresComponent.reload();
+    if (this._childComponent?.isActivated) {
+      const childComponent = this._childComponent.component;
+      if (childComponent instanceof ScoresComponent) {
+        childComponent.reload();
       }
     }
   }
@@ -141,7 +132,7 @@ export class GameComponent implements OnDestroy {
   public addScore() {
     if (this.gameInfo.points) {
       this._stats
-        .sendScore(this.name, this.gameInfo.points, this._userInfo.login.token)
+        .sendScore(this.name, this.gameInfo.points)
         .subscribe();
     }
   }
@@ -235,7 +226,7 @@ export class GameComponent implements OnDestroy {
       this.addScore();
     }
     this.addStatus('ready');
-    this.gameInfo.points = 0;
+    this.gameInfo.points = 1000;
     clearInterval(this.interval);
     this.seconds = 0;
     this.minutes = 0;

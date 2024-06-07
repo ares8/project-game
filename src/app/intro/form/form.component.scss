@@ -15,8 +15,6 @@ form {
 
 input,
 select {
-	@include step(6px, black);
-	background-color: #8bac0f;
 	border: none;
 	padding: 5px;
 	font-family: "VT323", system-ui, arial;
@@ -33,14 +31,6 @@ select {
 
 .token {
 	width: 150px;
-}
-
-input {
-	&.ng-touched {
-		&.ng-invalid {
-			background-color: #aaa;
-		}
-	}
 }
 
 input:focus {
@@ -66,11 +56,9 @@ p {
 	margin-bottom: 0px;
 	font-size: 28px;
 	font-weight: bold;
-	background-color: #444;
 	width: 105px;
-	color: #85a50e;
 	padding: 3px;
-	padding-bottom: 7px;
+	padding-bottom: 1px;
 	padding-left: 10px;
 }
 
@@ -98,4 +86,55 @@ app-buttons {
 	position: absolute;
 	left: -28px;
 	top: -23px;
+}
+
+.normal {
+
+	& .title-name,
+	& .title-token,
+	& .title-colors {
+		color: #85a50e;
+		background-color: #444;
+	}
+
+	& select,
+	& input {
+		@include step(6px, black);
+		background-color: #8bac0f;
+	}
+
+	& input {
+		&.ng-touched {
+			&.ng-invalid {
+				background-color: #aaa;
+			}
+		}
+	}
+}
+
+.high {
+	color: #91b40f;
+
+	& .title-name,
+	& .title-token,
+	& .title-colors {
+		color: #222;
+		background-color: #7f9d0d;
+	}
+
+	& select,
+	& input {
+		color: #a9d212;
+		caret-color: #91b40f;
+		background-color: #222;
+		@include step(6px, #91b40f);
+	}
+
+	& input {
+		&.ng-touched {
+			&.ng-invalid {
+				background-color: #425207;
+			}
+		}
+	}
 }

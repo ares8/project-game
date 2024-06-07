@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { HistoryDisplay, GameHistory, Options } from '../models';
 import { FormsModule } from '@angular/forms';
 import { StatisticsService } from '../services/statistics.service';

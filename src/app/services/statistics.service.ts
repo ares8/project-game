@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { GameHistory, Options, Score } from '../models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, tap, timer } from 'rxjs';
+import { filter, map, tap, timer } from 'rxjs';
 
-const loadUrl = 'http://localhost:8080/scores/snake';
-const sendUrl = 'http://localhost:8080/scores';
+const loadUrl = 'https://scores.chrum.it/scores/snake';
+const sendUrl = 'https://scores.chrum.it/scores';
 
 @Injectable({
   providedIn: 'root',
@@ -20,51 +20,55 @@ export class StatisticsService {
   };
   public namesInScores: Array<string> = [];
 
-  constructor(private _http: HttpClient) {}
-
   private _loadHeaders = new HttpHeaders({
     accept: 'application/json',
   });
 
-  public scores$ = this._http
-    .get<Array<Score>>(loadUrl, {
-      headers: this._loadHeaders,
-    })
+  private _sendHeaders!: HttpHeaders;
+
+  constructor(private _http: HttpClient) { }
+
+  public scores$ = this._http.get<Array<Score>>(loadUrl, { headers: this._loadHeaders })
     .pipe(
       tap(() => {
-        this.namesInScores = [];
+        this.namesInScores.length = 0;
       }),
-      map((data) =>
-        data
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 10)
-          .map((player, i) => {
-            !this.namesInScores.includes(player.name) &&
-              this.namesInScores.push(player.name);
-
-            player.position = i + 1;
-            return player;
-          })
+      filter((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          return true;
+        } else {
+          this.scores.length && (this.scores.length = 0);
+          return false;
+        }
+      }),
+      map((data) => data
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10)
+        .map((player, i) => {
+          !this.namesInScores.includes(player.name) && this.namesInScores.push(player.name);
+          player.position = i + 1;
+          return player;
+        })
       )
     );
 
-  public time$ = timer(0, 30000);
+  public timer$ = timer(0, 30000);
 
-  public sendScore(name: string, score: number, token: string) {
-    const headers = new HttpHeaders({
+  public createSendHeaders(token: string) {
+    this._sendHeaders = new HttpHeaders({
       accept: 'application/json',
       'Content-Type': 'application/json',
       'auth-token': token,
     });
+  }
 
+  public sendScore(name: string, score: number) {
     const body = {
       name: name,
       game: 'snake',
-      score: score,
+      score: score
     };
-    const options = { headers };
-
-    return this._http.post<Array<Score>>(sendUrl, body, options);
+    return this._http.post<Array<Score>>(sendUrl, body, { headers: this._sendHeaders });
   }
 
   public saveHistoryData(name: string, data: Array<GameHistory> | Options) {

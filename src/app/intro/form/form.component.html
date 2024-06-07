@@ -1,16 +1,19 @@
-<form #snakeForm="ngForm" autocomplete="off" (submit)="submitLoginInfo(snakeForm.form.value)">
+<form [class]="colors.value" [formGroup]="snakeForm" autocomplete="off" (submit)="submitLoginInfo(snakeForm)">
 	<div>
 		<p class="title-name">USER NAME</p>
-		<input name="name" #nameModel="ngModel" required minlength="3" maxlength="20" pattern="^\S+[\S\s]*\S+$" ngModel />
-		<div class="help" *ngIf="nameModel.touched && nameModel.invalid">
-			<p *ngIf="nameModel.errors?.['required']">
+		<input formControlName="name" />
+		<div class="help" *ngIf="name.touched && name.invalid">
+			<p *ngIf="name.errors?.['required']">
 				[NAME IS REQUIRED]
 			</p>
-			<p *ngIf="nameModel.errors?.['minlength'] || nameModel.errors?.['maxlength']">
-				[MIN.3 MAX.20 CHARACTERS LONG]<br />
+			<p *ngIf="name.errors?.['minlength']">
+				[MIN.5 CHARS LONG]<br />
 			</p>
-			<p *ngIf="nameModel.errors?.['pattern'] && nameModel.value.length > 1">
-				[WITHOUT WHITESPACE AT START AND END]<br />
+			<p *ngIf="name.errors?.['maxlength']">
+				[MAX.20 CHARS LONG]<br />
+			</p>
+			<p *ngIf="name.errors?.['pattern'] && name.value!.length > 1">
+				[WITHOUT WHITESPACE AT START AND END]
 			</p>
 		</div>
 	</div>
@@ -18,21 +21,28 @@
 	<div class="down">
 		<div>
 			<p class="title-token">USER TOKEN</p>
-			<input class="token" name="token" #tokenModel="ngModel" required type="text" ngModel />
-			<div class="help" *ngIf="tokenModel.touched && tokenModel.invalid">
-				<p *ngIf="tokenModel.errors?.['required']">
+			<input class="token" type="text" formControlName="token" />
+			<div class="help" *ngIf="token.touched && token.invalid">
+				<p *ngIf="token.errors?.['required']">
 					[TOKEN IS REQUIRED]
+				</p>
+				<p *ngIf="token.errors?.['minlength'] || token.errors?.['maxlength']">
+					[INPUT 4 CHARS]
+				</p>
+				<p *ngIf="token.errors?.['externalValidationFailed']">
+					[ONLY DIGITS]
 				</p>
 			</div>
 		</div>
 
 		<div>
 			<p class="title-colors">COLORS</p>
-			<select name="colors" #colorModel="ngModel" required ngModel>
+			<select formControlName="colors">
 				<option value="normal">normal</option>
 				<option value="high">high contrast</option>
 			</select>
 		</div>
 	</div>
+
 	<app-buttons [validation]="snakeForm.invalid" [block]="true"></app-buttons>
 </form>

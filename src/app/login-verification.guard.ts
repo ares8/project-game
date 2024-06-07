@@ -6,7 +6,7 @@ export const loginVerificationGuard: CanActivateFn = () => {
   const loginInfo = inject(UserInfoService);
   const router = inject(Router);
 
-  if (loginInfo.login) {
+  if (loginInfo.token) {
     return true;
   }
 
