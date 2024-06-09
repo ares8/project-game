@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
@@ -53,7 +54,7 @@ export class FormComponent {
           Validators.maxLength(4),
         ],
         asyncValidators: [
-          (control: AbstractControl): Observable<ValidationErrors | null> => {
+          (control: FormControl) => {
             return this._userInfo.checkToken(control.value)
               .pipe(
                 map((valid) => {
